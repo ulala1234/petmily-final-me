@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kh.petmily.mapper.DonationMapper">
+
+    <!--쿼리 수정 필요-->
+    <!--=======BasicMapper 메소드=======-->
+    <select id="selectByPk" resultType="kh.petmily.domain.donation.Donation">
+        select *
+        from DONATION
+        where DNUMBER = #{pk}
+    </select>
+
+    <insert id="insert">
+        insert into DONATION(ABNUMBER, MNUMBER, DONASUM, DONAPERIOD, BANK, ACCOUNTHOLDER, ACCOUNTNUMBER)
+        values (#{abNumber}, #{mNumber}, #{donaSum}, #{donaPeriod}, #{bank}, #{accountHolder}, #{accountNumber})
+    </insert>
+
+    <update id="update">
+        update DONATION
+        set ABNUMBER = #{abNumber}, MNUMBER = #{mNumber}, DONASUM = #{donaSum}, DONAPERIOD = #{donaPeriod},
+        BANK = #{bank}, ACCOUNTHOLDER = #{accountHolder}, ACCOUNTNUMBER = #{accountNumber}
+        where DNUMBER = #{dNumber}
+    </update>
+
+    <delete id="delete">
+        delete from DONATION
+        where DNUMBER = #{pk}
+    </delete>
+    <!--=======BasicMapper 메소드=======-->
+
+    <select id="selectCount" resultType="int">
+        select count(*)
+        from DONATION
+    </select>
+
+    <select id="selectIndex" resultType="kh.petmily.domain.donation.form.DonationListForm">
+        select * from
+        (select ROWNUM as NUM, A.* from
+        (select * from DONATION order by DNUMBER desc) A)
+        where NUM between #{start} and #{end}
+    </select>
+
+    <select id="selectByContent" resultType="kh.petmily.domain.donation.Donation">
+        select D.*, AB.NAME, M.NAME
+        from DONATION D, ABANDONEDANIMAL AB, MEMBER M
+        where D.ABNUMBER = AB.ABNUMBER AND D.MNUMBER = M.MNUMBER and DNUMBER = #{dNumber}
+    </select>
+</mapper>

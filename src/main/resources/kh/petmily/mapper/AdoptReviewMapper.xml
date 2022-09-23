@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kh.petmily.mapper.AdoptReviewMapper">
+
+    <!--=======BasicMapper 메소드=======-->
+    <select id="selectByPk" resultType="kh.petmily.domain.adopt_review.AdoptReview">
+        select *
+        from BOARD
+        where BNUMBER = #{pk}
+    </select>
+
+    <insert id="insert">
+        insert into BOARD(MNUMBER, KINDOFBOARD, TITLE, CONTENT, IMGPATH, VIDEO, WRTIME, CHECKPUBLIC)
+        values (#{mNumber}, #{kindOfBoard}, #{title}, #{content}, #{imgPath}, null, SYSDATE, #{checkPublic})
+    </insert>
+
+    <update id="update">
+        update BOARD
+        set TITLE = #{title}, CONTENT = #{content}, CHECKPUBLIC = #{checkPublic}, WRTIME = SYSDATE
+        <if test='imgPath != null '>
+            ,IMGPATH = #{imgPath}
+        </if>
+        where BNUMBER = #{bNumber}
+    </update>
+
+    <delete id="delete">
+        delete from BOARD
+        where BNUMBER = #{pk}
+    </delete>
+    <!--=======BasicMapper 메소드=======-->
+
+    <!--====== 검색 추가 ======-->
+    <select id="selectCountWithCondition" resultType="java.lang.Integer">
+        select count(*)
+        from BOARD B inner join MEMBER M
+        on B.MNUMBER = M.MNUMBER
+        <where>
+            <if test="keyword != null and keyword != 'allKeyword' and searchType != null and 'title'.equals( searchType )">
+                and B.TITLE like '%' || #{keyword} || '%'
+            </if>
+
+            <if test="keyword != null and keyword != 'allKeyword' and searchType != null and 'content'.equals( searchType )">
+                and B.CONTENT like '%' || #{keyword} || '%'
+            </if>
+
+            <if test="keyword != null and keyword != 'allKeyword' and searchType != null and 'name'.equals( searchType )">
+                and M.NAME like '%' || #{keyword} || '%'
+            </if>
+
+            <if test="keyword != null and keyword != 'allKeyword' and searchType != null and 'allSearch'.equals( searchType )">
+                and (B.TITLE like '%' || #{keyword} || '%'
+                or B.CONTENT like '%' || #{keyword} || '%')
+            </if>
+            and B.KINDOFBOARD = #{kindOfBoard}
+        </where>
+    </select>
+
+    <!--====== 검색 추가 ======-->
+    <select id="selectIndexWithCondition" resultType="kh.petmily.domain.adopt_review.AdoptReview">
+        select *
+        from (select ROWNUM as NUM, A.*
+        from (select * from BOARD B inner join MEMBER M
+        on B.MNUMBER = M.MNUMBER
+        <where>
+            <if test="keyword != null and keyword != 'allKeyword' and searchType != null and 'title'.equals( searchType )">
+                and B.TITLE like '%' || #{keyword} || '%'
+            </if>
+
+            <if test="keyword != null and keyword != 'allKeyword' and searchType != null and 'content'.equals( searchType )">
+                and B.CONTENT like '%' || #{keyword} || '%'
+            </if>
+
+            <if test="keyword != null and keyword != 'allKeyword' and searchType != null and 'name'.equals( searchType )">
+                and M.NAME like '%' || #{keyword} || '%'
+            </if>
+
+            <if test="keyword != null and keyword != 'allKeyword' and searchType != null and 'allSearch'.equals( searchType )">
+                and (B.TITLE like '%' || #{keyword} || '%'
+                or B.CONTENT like '%' || #{keyword} || '%')
+            </if>
+            and B.KINDOFBOARD = #{kindOfBoard}
+        </where>
+        order by B.BNUMBER desc) A)
+        where NUM between #{start} and #{end}
+    </select>
+
+    <select id="selectName" resultType="java.lang.String">
+        select M.NAME
+        from BOARD B inner join MEMBER M
+        on B.MNUMBER = M.MNUMBER
+        where B.BNUMBER = #{pk}
+    </select>
+
+    <select id="selectAll" resultType="kh.petmily.domain.adopt_review.AdoptReview">
+        select *
+        from BOARD
+        where KINDOFBOARD = #{kindOfBoard}
+        order by BNUMBER desc
+    </select>
+
+    <!--====== 조회수 추가 ======-->
+    <update id="updateViewCount">
+        update BOARD
+        set VIEWCOUNT = VIEWCOUNT + 1
+        where BNUMBER = #{bNumber}
+    </update>
+</mapper>

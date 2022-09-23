@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kh.petmily.mapper.ReplyMapper">
+
+    <!--=======BasicMapper 메소드=======-->
+    <select id="selectByPk" resultType="kh.petmily.domain.reply.Reply">
+        select *
+        from BOARDREPLY
+        where BRNUMBER = #{pk}
+    </select>
+
+    <insert id="insert">
+        insert into BOARDREPLY(BNUMBER, MNUMBER, REPLY)
+        values (#{bNumber}, #{mNumber}, #{reply})
+    </insert>
+
+    <update id="update">
+        update BOARDREPLY
+        set REPLY = #{reply}
+        where BRNUMBER = #{brNumber}
+    </update>
+
+    <delete id="delete">
+        delete
+        from BOARDREPLY
+        where BRNUMBER = #{pk}
+    </delete>
+    <!--=======BasicMapper 메소드=======-->
+
+    <select id="getList" resultType="kh.petmily.domain.reply.Reply">
+        select *
+        from BOARDREPLY
+        where BNUMBER = #{bNumber}
+        order by brNumber desc
+    </select>
+</mapper>

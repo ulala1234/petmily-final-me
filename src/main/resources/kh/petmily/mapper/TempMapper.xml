@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kh.petmily.mapper.TempMapper">
+
+    <!--=======BasicMapper 메소드=======-->
+    <select id="selectByPk" resultType="kh.petmily.domain.temp.TempPet">
+        select *
+        from TEMPPET
+        where TNUMBER = #{pk}
+    </select>
+
+    <insert id="insert">
+        insert into TEMPPET (ABNUMBER, MNUMBER, RESIDENCE, MARITALSTATUS, JOB, TEMPDATE, TEMPPERIOD)
+        values (#{abNumber}, #{mNumber}, #{residence}, #{maritalStatus}, #{job}, SYSDATE, 2)
+    </insert>
+
+    <update id="update">
+        update TEMPPET
+        set ABNUMBER = #{abNumber}, MNUMBER = #{mNumber}, TEMPDATE = #{tempDate}, TEMPPERRIOD = #{tempPeriod},
+            RESIDENCE = #{residence}, MARITALSTATUS = #{maritalStatus}, JOB = #{job}, STATUS = #{status}
+        where TNUMBER = #{tNumber}
+    </update>
+
+    <delete id="delete">
+        delete from TEMPPET
+        where TNUMBER = #{pk}
+    </delete>
+
+    <!--======= 관리자 페이지 =======-->
+    <select id="selectCount" resultType="int">
+        select count(*)
+        from TEMPPET
+    </select>
+
+    <select id="selectCountBymNumber" resultType="java.lang.Integer">
+        select count(*)
+        from TEMPPET
+        where MNUMBER = #{mNumber}
+    </select>
+
+    <select id="selectIndexBymNumber" resultType="kh.petmily.domain.temp.TempPet">
+        select *
+        from (select ROWNUM as NUM, T.*
+              from (select * from TEMPPET where MNUMBER = #{mNumber} order by TNUMBER DESC) T)
+        where NUM between #{start} and #{end}
+    </select>
+
+    <select id="selectIndexByStatus" resultType="kh.petmily.domain.adopt.form.AdoptTempListForm">
+        select *
+        from (select ROWNUM as NUM, A.*
+              from (select * from TEMPPET order by TNUMBER DESC) A)
+        where (NUM between #{start} and #{end}) and status = #{status}
+    </select>
+
+    <select id="tempApprove" resultType="kh.petmily.domain.adopt.form.AdoptTempListForm">
+        {call
+            declare
+            begin
+            update ABANDONEDANIMAL set ANIMALSTATE = '임보' where ANIMALSTATE = '보호'
+            and ABNUMBER = (select AB.ABNUMBER
+            from TEMPPET T join ABANDONEDANIMAL AB
+            on AB.ABNUMBER = T.ABNUMBER
+                where T.TNUMBER = #{pk});
+
+            update TEMPPET set STATUS = '완료' where STATUS = '처리중'
+            and ABNUMBER = (select T.ABNUMBER
+            from TEMPPET T join ABANDONEDANIMAL AB
+            on AB.ABNUMBER = T.ABNUMBER
+                where T.TNUMBER = #{pk});
+            end
+            }
+    </select>
+
+    <select id="tempRefuse" resultType="kh.petmily.domain.adopt.form.AdoptTempListForm">
+        update TEMPPET set STATUS = '거절' where STATUS = '처리중'
+                                           and ABNUMBER = (select T.ABNUMBER
+                                                           from TEMPPET T join ABANDONEDANIMAL AB
+                                                                               on AB.ABNUMBER = T.ABNUMBER
+                                                           where T.TNUMBER = #{pk})
+    </select>
+
+</mapper>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kh.petmily.mapper.AdoptMapper">
+
+    <!--=======BasicMapper 메소드=======-->
+    <select id="selectByPk" resultType="kh.petmily.domain.adopt.Adopt">
+        select *
+        from ADOPT
+        where ADNUMBER = #{pk}
+    </select>
+
+    <insert id="insert">
+        insert into ADOPT(MNUMBER, ABNUMBER, RESIDENCE, MARITALSTATUS, JOB)
+        values (#{mNumber}, #{abNumber}, #{residence}, #{maritalStatus}, #{job})
+    </insert>
+
+    <update id="update">
+        update ADOPT
+        set MNUMBER = #{mNumber}, ABNUMBER = #{abNumber}, RESIDENCE = #{residence}, MARITALSTATUS = #{maritalStatus}, JOB = #{job}, STATUS = #{status}
+        where ADNUMBER = #{adNumber}
+    </update>
+
+    <delete id="delete">
+        delete from ADOPT
+        where ADNUMBER = #{pk}
+    </delete>
+
+    <!--======= 관리자 페이지 =======-->
+    <select id="selectCount" resultType="int">
+        select count(*)
+        from ADOPT
+    </select>
+
+    <select id="adoptApprove" resultType="kh.petmily.domain.adopt.form.AdoptTempListForm">
+        {call
+            declare
+            begin
+
+            insert into PET (MNUMBER, NAME, SPECIES, KIND, GENDER)
+            values(
+            (select AD.MNUMBER
+                from ADOPT AD join ABANDONEDANIMAL AB
+                on AD.ABNUMBER = AB.ABNUMBER
+                    where AD.ADNUMBER = #{pk}),
+            (select AB.NAME
+                from ADOPT AD join ABANDONEDANIMAL AB
+                on AD.ABNUMBER = AB.ABNUMBER
+                    where AD.ADNUMBER = #{pk}),
+            (select AB.SPECIES
+                from ADOPT AD join ABANDONEDANIMAL AB
+                on AD.ABNUMBER = AB.ABNUMBER
+                    where AD.ADNUMBER = #{pk}),
+            (select AB.KIND
+                from ADOPT AD join ABANDONEDANIMAL AB
+                on AD.ABNUMBER = AB.ABNUMBER
+                    where AD.ADNUMBER = #{pk}),
+            (select AB.GENDER
+                from ADOPT AD join ABANDONEDANIMAL AB
+                on AD.ABNUMBER = AB.ABNUMBER
+                    where AD.ADNUMBER = #{pk})
+            );
+
+            update ADOPT set STATUS = '완료' where STATUS = '처리중'
+            and ABNUMBER = (select AD.ABNUMBER
+            from ADOPT AD join ABANDONEDANIMAL AB
+            on AB.ABNUMBER = AD.ABNUMBER
+                where AD.ADNUMBER = #{pk});
+
+            update ABANDONEDANIMAL set ANIMALSTATE = '입양' where ANIMALSTATE = '보호'
+            and ABNUMBER = (select AB.ABNUMBER
+            from ADOPT AD join ABANDONEDANIMAL AB
+            on AB.ABNUMBER = AD.ABNUMBER
+                where AD.ADNUMBER = #{pk});
+
+            end
+        }
+    </select>
+
+    <select id="adoptRefuse" resultType="kh.petmily.domain.adopt.form.AdoptTempListForm">
+              update ADOPT set STATUS = '거절' where STATUS = '처리중'
+              and ABNUMBER = (select AD.ABNUMBER
+              from ADOPT AD join ABANDONEDANIMAL AB
+              on AB.ABNUMBER = AD.ABNUMBER
+              where AD.ADNUMBER = #{pk})
+    </select>
+
+    <select id="selectCountBymNumber" resultType="java.lang.Integer">
+        select count(*)
+        from ADOPT
+        where MNUMBER = #{mNumber}
+    </select>
+
+    <select id="selectIndexBymNumber" resultType="kh.petmily.domain.adopt.Adopt">
+        select *
+        from (select ROWNUM as NUM, A.*
+              from (select * from ADOPT where MNUMBER = #{mNumber} order by ADNUMBER DESC) A)
+        where NUM between #{start} and #{end}
+    </select>
+
+    <select id="selectIndexByStatus" resultType="kh.petmily.domain.adopt.form.AdoptTempListForm">
+        select *
+        from (select ROWNUM as NUM, A.*
+              from (select * from ADOPT order by ADNUMBER DESC) A)
+        where (NUM between #{start} and #{end}) and status = #{status}
+    </select>
+</mapper>

@@ -1,0 +1,21 @@
+#spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
+#spring.datasource.url=jdbc:oracle:thin:@petmily_medium?TNS_ADMIN=/Users/joojongbum/oracle_db/Wallet_petmily/
+#spring.datasource.username=jjb1
+#spring.datasource.password=Petmilymember1
+#
+#spring.mvc.view.prefix=/WEB-INF/view/
+#spring.mvc.view.suffix=.jsp
+#
+#mybatis.mapper-locations=classpath:mapper/**/*.xml
+#mybatis.type-aliases-package=kh.petmily.domain
+
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@petmily_medium?TNS_ADMIN=/Users/joojongbum/oracle_db/Wallet_petmily/
+    username: jjb1
+    password: Petmilymember1
+  mvc:
+    view:
+      prefix: /WEB-INF/view/
+      suffix: .jsp

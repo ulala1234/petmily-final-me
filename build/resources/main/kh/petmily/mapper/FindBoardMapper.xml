@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kh.petmily.mapper.FindBoardMapper">
+
+    <!--=======BasicMapper 메소드=======-->
+    <select id="selectByPk" resultType="kh.petmily.domain.find_board.FindBoard">
+        select *
+        from FINDANIMALBOARD
+        where FANUMBER = #{pk}
+    </select>
+
+    <insert id="insert">
+        insert into FINDANIMALBOARD(MNUMBER, SPECIES, KIND, LOCATION, TITLE, CONTENT
+        <if test='imgPath != null and imgPath !=""'>
+            ,IMGPATH
+        </if>
+        )
+        values (#{mNumber}, #{species}, #{kind}, #{location}, #{title}, #{content}
+
+        <if test='imgPath != null and imgPath !=""'>
+            ,#{imgPath}
+        </if>
+        )
+    </insert>
+
+    <update id="update">
+        update FINDANIMALBOARD
+        set SPECIES  = #{species},
+            KIND     = #{kind},
+            LOCATION = #{location},
+        <if test='imgPath != null '>
+            IMGPATH = #{imgPath},
+        </if>
+            TITLE    = #{title},
+            CONTENT  = #{content}
+        where FANUMBER = #{faNumber}
+    </update>
+
+    <delete id="delete">
+        delete
+        from FINDANIMALBOARD
+        where FANUMBER = #{pk}
+    </delete>
+    <!--=======BasicMapper 메소드=======-->
+
+    <select id="selectCountWithCondition" resultType="java.lang.Integer">
+        select count(*)
+        from FINDANIMALBOARD
+        <where>
+            <if test="species != null and species != 'allSpecies'">
+                and SPECIES = #{species}
+            </if>
+
+            <if test="animalState != null and animalState != 'allAnimalState'">
+                and AnimalState = #{animalState}
+            </if>
+
+            <if test="keyword != null and keyword != 'allKeyword'">
+                and ( TITLE like '%' || #{keyword} || '%'
+                or CONTENT like '%' || #{keyword} || '%'
+                or KIND like '%' || #{keyword} || '%'
+                or LOCATION like '%' || #{keyword} || '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectIndexWithCondition" resultType="kh.petmily.domain.find_board.FindBoard">
+        select *
+        from (select ROWNUM as NUM, A.*
+        FROM (select *
+        from FINDANIMALBOARD
+        <where>
+            <if test="species != null and species != 'allSpecies'">
+                and SPECIES = #{species}
+            </if>
+
+            <if test="animalState != null and animalState != 'allAnimalState'">
+                and AnimalState = #{animalState}
+            </if>
+
+            <if test="keyword != null and keyword != 'allKeyword'">
+                and ( TITLE like '%' || #{keyword} || '%'
+                or CONTENT like '%' || #{keyword} || '%'
+                or KIND like '%' || #{keyword} || '%'
+                or LOCATION like '%' || #{keyword} || '%')
+            </if>
+        </where>
+        order by FANUMBER DESC) A)
+        where NUM between #{start} and #{end}
+    </select>
+
+    <select id="selectFindWriteForm" resultType="kh.petmily.domain.find_board.FindBoard">
+        select *
+        from FINDANIMALBOARD
+        where FANUMBER = #{pk}
+    </select>
+
+    <select id="selectName" resultType="java.lang.String">
+        select M.NAME
+        from FINDANIMALBOARD F
+        inner join MEMBER M on F.MNUMBER = M.MNUMBER
+        where F.FANUMBER = #{pk}
+    </select>
+
+    <update id="updateViewCount">
+        update FINDANIMALBOARD
+        set VIEWCOUNT = VIEWCOUNT + 1
+        where FANUMBER = #{pk}
+    </update>
+
+    <!--=======find-look 연결=======-->
+    <select id="selectMatchedLa" resultType="java.lang.Integer">
+        select LANUMBER
+        from LOOKANIMALBOARD
+        <where>
+            SPECIES = #{species}
+            <if test="kind != '모름'">
+                and (KIND = #{kind} or KIND = '모름')
+            </if>
+            <if test="location != '모름'">
+                and (LOCATION = #{location} or LOCATION = '모름')
+            </if>
+        </where>
+    </select>
+
+    <update id="changeState">
+        update FINDANIMALBOARD
+        set ANIMALSTATE = '매칭됨'
+        where FANUMBER = #{faNumber}
+    </update>
+
+    <update id="backState">
+        update FINDANIMALBOARD
+        set ANIMALSTATE = '실종'
+        where FANUMBER = #{faNumber}
+    </update>
+
+    <update id="changeStateLook">
+        update LOOKANIMALBOARD
+        set ANIMALSTATE = '매칭됨'
+        where LANUMBER = #{laNumber}
+    </update>
+
+    <update id="backStateLook">
+        update LOOKANIMALBOARD
+        set ANIMALSTATE = '보호'
+        where LANUMBER = #{laNumber}
+    </update>
+
+    <select id="selectByPkMax" resultType="java.lang.Integer">
+        select MAX(FANUMBER)
+        from FINDANIMALBOARD
+    </select>
+
+    <select id="selectMemberCount" resultType="java.lang.Integer">
+        select count(*)
+        from FINDANIMALBOARD
+        <where>
+            MNUMBER = #{mNumber}
+            <if test="matched == 'matched'">
+                and ANIMALSTATE = '매칭됨'
+            </if>
+        </where>
+    </select>
+
+    <select id="selectMemberIndex" resultType="kh.petmily.domain.find_board.FindBoard">
+        select *
+        from (select ROWNUM as NUM, A.*
+        FROM (select * from FINDANIMALBOARD
+        <where>
+            MNUMBER = #{mNumber}
+            <if test="matched == 'matched'">
+                and ANIMALSTATE = '매칭됨'
+            </if>
+            order by FANUMBER DESC) A)
+        </where>
+        where NUM between #{start} and #{end}
+    </select>
+
+    <select id="selectAll" resultType="kh.petmily.domain.find_board.FindBoard">
+        select *
+        from FINDANIMALBOARD
+        order by FANUMBER desc
+    </select>
+</mapper>
