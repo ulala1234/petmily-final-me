@@ -7,7 +7,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="/css/freeBoard.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/resources/petsitting-master/css/animate.css">
     <link rel="stylesheet" href="/resources/petsitting-master/css/owl.carousel.min.css">
@@ -42,7 +43,8 @@
                 </c:if>
                 <c:if test="${param.kindOfBoard eq '문의'}">
                     <p class="breadcrumbs mb-2">
-                        <span class="mr-2"><span>Inquiry Board - Detail<i class="ion-ios-arrow-forward"></i></span></span>
+                        <span class="mr-2"><span>Inquiry Board - Detail<i
+                                class="ion-ios-arrow-forward"></i></span></span>
                     </p>
                     <h1 class="mb-0 bread">문의 게시판 - 상세보기</h1>
                 </c:if>
@@ -69,6 +71,7 @@
                         <h6 class="mt-1"></h6>
                         <small><a href="javascript:void(0)">${detailForm.name}</a></small>
                         <small><i class="far fa-comment ml-2"></i> date ${detailForm.wrTime} </small>
+                        <small><i class="far fa-comment ml-2"></i> 조회수: ${detailForm.viewCount} </small>
 
                         <c:if test="${param.kindOfBoard eq '문의'}">
                             <c:if test="${detailForm.checkPublic eq 'Y'}">
