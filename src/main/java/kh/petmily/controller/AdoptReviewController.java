@@ -87,9 +87,6 @@ public class AdoptReviewController {
     public String detail(@RequestParam("bNumber") int bNumber, Model model) {
         AdoptReviewForm detailForm = adoptReviewService.getAdoptReview(bNumber);
 
-        // ====== 조회수 추가 ======
-        adoptReviewService.updateViewCount(bNumber);
-
         model.addAttribute("detailForm", detailForm);
 
         return "/adopt_review/detailFormAdoptReview";

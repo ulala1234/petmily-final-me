@@ -22,8 +22,6 @@ public interface BoardService {
 
     public void delete(int bNumber);
 
-    public int updateViewCount(int bNumber);
-
     public List<AdminBoardListForm> selectAll(String kindOfBoard);
 
     public String findName(int mNumber);
