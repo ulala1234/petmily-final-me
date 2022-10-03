@@ -1,5 +1,6 @@
 package kh.petmily.service;
 
+import kh.petmily.dao.BoardDao;
 import kh.petmily.dao.MemberDao;
 import kh.petmily.dao.ReplyDao;
 import kh.petmily.domain.reply.Reply;
@@ -20,27 +21,35 @@ public class ReplyServiceImpl implements ReplyService {
 
     private final ReplyDao replyDao;
     private final MemberDao memberDao;
+    private final BoardDao boardDao;
 
     @Override
     public void write(ReplyWriteForm replyWriteForm) {
         Reply reply = new Reply(replyWriteForm.getbNumber(), replyWriteForm.getmNumber(), replyWriteForm.getReply());
+
         replyDao.insert(reply);
+        boardDao.updateReplyCount(reply.getBNumber(), 1);
     }
 
     @Override
     public void modify(ReplyModifyForm replyModifyForm) {
         Reply reply = new Reply(replyModifyForm.getBrNumber(), replyModifyForm.getReply());
+
         replyDao.update(reply);
     }
 
     @Override
     public void delete(int brNumber) {
+        int bNumber = replyDao.getBNumber(brNumber);
+
         replyDao.delete(brNumber);
+        boardDao.updateReplyCount(bNumber, -1);
     }
 
     @Override
     public List<ReadReplyForm> getList(int bNumber) {
         List<ReadReplyForm> result = new ArrayList<>();
+
         List<Reply> replies = replyDao.list(bNumber);
 
         for (Reply reply : replies) {
@@ -49,5 +58,10 @@ public class ReplyServiceImpl implements ReplyService {
         }
 
         return result;
+    }
+
+    @Override
+    public int selectCount(int bNumber) {
+        return replyDao.selectCount(bNumber);
     }
 }

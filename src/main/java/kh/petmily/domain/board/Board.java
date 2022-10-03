@@ -10,6 +10,7 @@ import java.sql.Date;
 @Getter
 @NoArgsConstructor
 public class Board implements DomainObj {
+
     private int bNumber;
     private int mNumber;
     private String name;
@@ -21,9 +22,10 @@ public class Board implements DomainObj {
     private Date wrTime;
     private String checkPublic;
     private int viewCount;
+    private int replyCount;
     private String sort;
 
-    public Board(int mNumber, int bNumber, String kindOfBoard, String title, String content, String imgPath, Blob video, Date wrTime, String checkPublic, int viewCount) {
+    public Board(int mNumber, int bNumber, String kindOfBoard, String title, String content, String imgPath, Blob video, Date wrTime, String checkPublic, int viewCount, int replyCount) {
         this.bNumber = bNumber;
         this.mNumber = mNumber;
         this.kindOfBoard = kindOfBoard;
@@ -34,6 +36,7 @@ public class Board implements DomainObj {
         this.wrTime = wrTime;
         this.checkPublic = checkPublic;
         this.viewCount = viewCount;
+        this.replyCount = replyCount;
     }
 
     public Board(int mNumber, int bNumber, String name, String kindOfBoard, String title, String content, Date wrTime, String checkPublic) {
@@ -47,7 +50,7 @@ public class Board implements DomainObj {
         this.checkPublic = checkPublic;
     }
 
-    public Board(int mNumber, int bNumber, String name, String kindOfBoard, String title, String content, Date wrTime, String checkPublic, int viewCount, String sort) {
+    public Board(int mNumber, int bNumber, String name, String kindOfBoard, String title, String content, Date wrTime, String checkPublic, int viewCount, int replyCount, String sort) {
         this.mNumber = mNumber;
         this.bNumber = bNumber;
         this.name = name;
@@ -57,6 +60,7 @@ public class Board implements DomainObj {
         this.wrTime = wrTime;
         this.checkPublic = checkPublic;
         this.viewCount = viewCount;
+        this.replyCount = replyCount;
         this.sort = sort;
     }
 

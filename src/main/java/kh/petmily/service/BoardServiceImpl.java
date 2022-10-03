@@ -54,6 +54,7 @@ public class BoardServiceImpl implements BoardService {
                 readBoardForm.getWrTime(),
                 readBoardForm.getCheckPublic(),
                 readBoardForm.getViewCount(),
+                readBoardForm.getReplyCount(),
                 readBoardForm.getSort()
         );
     }

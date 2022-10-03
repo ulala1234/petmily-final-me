@@ -12,7 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/replies")
@@ -23,7 +25,9 @@ public class ReplyController {
     private final ReplyService replyService;
 
     @GetMapping("/{bNumber}")
-    public ResponseEntity<List<ReadReplyForm>> list(@PathVariable("bNumber") int bNumber, HttpServletRequest request) {
+    public ResponseEntity<Map<String, Object>> list(@PathVariable("bNumber") int bNumber, HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<>();
+
         Member authMember = (Member) request.getSession(false).getAttribute("authUser");
 
         List<ReadReplyForm> list = replyService.getList(bNumber);
@@ -36,7 +40,12 @@ public class ReplyController {
             }
         }
 
-        return new ResponseEntity<>(list, HttpStatus.OK);
+        int replyCount = replyService.selectCount(bNumber);
+
+        map.put("list", list);
+        map.put("replyCount", replyCount);
+
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
     @PostMapping("/{bNumber}")

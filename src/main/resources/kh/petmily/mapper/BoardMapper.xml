@@ -39,8 +39,8 @@
         (select ROWNUM as NUM, A.* from
         (select * from BOARD
         where KINDOFBOARD = #{kindOfBoard}
-        <include refid="sort" />
-            ) A)
+        <include refid="sort"/>
+        ) A)
         where NUM between #{start} and #{end}
     </select>
 
@@ -57,10 +57,10 @@
     </sql>
 
     <select id="selectName" resultType="java.lang.String">
-            select M.NAME
-            from BOARD B inner join MEMBER M
-            on B.MNUMBER = M.MNUMBER
-            where B.BNUMBER = #{pk}
+        select M.NAME
+        from BOARD B inner join MEMBER M
+        on B.MNUMBER = M.MNUMBER
+        where B.BNUMBER = #{pk}
     </select>
 
     <select id="selectByContent" resultType="kh.petmily.domain.board.Board">
@@ -72,6 +72,12 @@
     <update id="updateViewCount">
         update BOARD
         set VIEWCOUNT = VIEWCOUNT + 1
+        where BNUMBER = #{pk}
+    </update>
+
+    <update id="updateReplyCount">
+        update BOARD
+        set REPLYCOUNT = REPLYCOUNT + #{amount}
         where BNUMBER = #{pk}
     </update>
 

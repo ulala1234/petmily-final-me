@@ -15,4 +15,6 @@ public interface ReplyService {
     public void delete(int brNumber);
 
     public List<ReadReplyForm> getList(int bNumber);
+
+    public int selectCount(int bNumber);
 }

@@ -29,5 +29,7 @@ public interface BoardMapper {
 
     int updateViewCount(int pk);
 
+    int updateReplyCount(@Param("pk") int pk, @Param("amount") int amount);
+
     List<Board> selectAll(String kindOfBoard);
 }

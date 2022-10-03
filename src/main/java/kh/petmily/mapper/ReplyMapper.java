@@ -17,4 +17,8 @@ public interface ReplyMapper {
     void delete(int pk);
 
     List<Reply> getList(int bNumber);
+
+    int selectCount(int bNumber);
+
+    int getBNumber(int pk);
 }

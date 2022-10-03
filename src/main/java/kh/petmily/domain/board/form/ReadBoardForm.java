@@ -6,6 +6,7 @@ import java.util.Date;
 
 @Data
 public class ReadBoardForm {
+
     private int bNumber;
     private int mNumber;
     private String name;
@@ -15,9 +16,10 @@ public class ReadBoardForm {
     private Date wrTime;
     private String checkPublic;
     private int viewCount;
+    private int replyCount;
     private String sort;
 
-    public ReadBoardForm(int bNumber, int mNumber, String name, String kindOfBoard, String title, String content, Date wrTime, String checkPublic, int viewCount, String sort) {
+    public ReadBoardForm(int bNumber, int mNumber, String name, String kindOfBoard, String title, String content, Date wrTime, String checkPublic, int viewCount, int replyCount, String sort) {
         this.bNumber = bNumber;
         this.mNumber = mNumber;
         this.name = name;
@@ -27,6 +29,7 @@ public class ReadBoardForm {
         this.wrTime = wrTime;
         this.checkPublic = checkPublic;
         this.viewCount = viewCount;
+        this.replyCount = replyCount;
         this.sort = sort;
     }
 }

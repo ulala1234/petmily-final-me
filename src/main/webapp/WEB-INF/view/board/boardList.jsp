@@ -93,7 +93,7 @@ pageEncoding="UTF-8" %>
                             <div class="text-secondary">
                                 <c:if test="${param.kindOfBoard eq '자유'}">
                                     <a href="/board/detail?kindOfBoard=${param.kindOfBoard}&bNumber=${board.getBNumber()}"
-                                       class="text-body" style="font-size: 1.3em;">${board.title} []</a>
+                                       class="text-body" style="font-size: 1.3em;">${board.title}</a>
                                 </c:if>
                                 <c:if test="${param.kindOfBoard eq '문의'}">
                                     <c:choose>
@@ -134,7 +134,10 @@ pageEncoding="UTF-8" %>
                             </c:if>
 
                             <div>
-                                조회수 : ${board.viewCount}
+                                조회: ${board.viewCount}
+                            </div>
+                            <div>
+                                댓글: ${board.replyCount}
                             </div>
                         </div>
 
