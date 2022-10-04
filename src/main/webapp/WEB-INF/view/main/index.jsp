@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
+<style>
+html{
+scroll-behavior: smooth;
+}
+</style>
 <head>
     <title>Petmily-Don't buy, Do Adopt</title>
     <meta charset="utf-8">
@@ -110,32 +115,33 @@
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="flaticon-stethoscope"></span></div>
                         <div class="text pl-3">
-                            <h4>about us-1</h4>
-                            <p>한 해에 수천마리의 동물이 유기되고 있습니다.</p>
+                            <h4>Petmily 가 하는 일</h4>
+                            <p>한 해에 수천마리의 동물이 유기되고 있습니다. Petmily는 그런 동물들의 구조와 입양을 돕고 있습니다.</p>
                         </div>
                     </div>
                     <div class="col-md-6 services-2 w-100 d-flex">
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="flaticon-customer-service"></span></div>
                         <div class="text pl-3">
-                            <h4>about us-2</h4>
-                            <p>사이트를 설계한 이유 목적</p>
+                            <h4>Petmily 설립 목적</h4>
+                            <p>Petmily는 인간에 의해 관리되는 모든 동물들이 인도적인 대우를 받게 하고자 하기 위해 설립되었습니다.</p>
                         </div>
                     </div>
                     <div class="col-md-6 services-2 w-100 d-flex">
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="flaticon-emergency-call"></span></div>
                         <div class="text pl-3">
-                            <h4>about us-3</h4>
-                            <p>도움 요청</p>
+                            <h4>저희를 도와주세요!</h4>
+                            <p>그런 동물들에게 따뜻한 가족이 되어주세요. 당신의 가족이 애타게 기다리고 있습니다.</p>
                         </div>
                     </div>
                     <div class="col-md-6 services-2 w-100 d-flex">
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="flaticon-veterinarian"></span></div>
                         <div class="text pl-3">
-                            <h4>about us-4</h4>
-                            <p>글글글</p>
+                            <h4>그들은 가족입니다.</h4>
+                            <p>#동물은물건이아닙니다<br>
+                               #우리의가족이고생명입니다</p>
                         </div>
                     </div>
                 </div>

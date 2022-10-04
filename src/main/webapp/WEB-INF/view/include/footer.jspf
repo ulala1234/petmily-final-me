@@ -4,64 +4,43 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
-                <h2 class="footer-heading">Petsitting</h2>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                <h2 class="footer-heading">Petmily</h2>
                 <ul class="ftco-footer-social p-0">
-                    <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top"
+                    <li class="ftco-animate"><a href="https://twitter.com/" data-toggle="tooltip" data-placement="top"
                                                 title="Twitter"><span class="fa fa-twitter"></span></a></li>
-                    <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top"
+                    <li class="ftco-animate"><a href="https://ko-kr.facebook.com/" data-toggle="tooltip" data-placement="top"
                                                 title="Facebook"><span class="fa fa-facebook"></span></a></li>
-                    <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top"
+                    <li class="ftco-animate"><a href="https://www.instagram.com/" data-toggle="tooltip" data-placement="top"
                                                 title="Instagram"><span class="fa fa-instagram"></span></a></li>
                 </ul>
             </div>
             <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
-                <h2 class="footer-heading">Latest News</h2>
+                <h2 class="footer-heading">Account Number</h2>
                 <div class="block-21 mb-4 d-flex">
-                    <a class="img mr-4 rounded"
-                       style="background-image: url(/resources/petsitting-master/images/image_1.jpg);"></a>
-                    <div class="text">
-                        <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                        <div class="meta">
-                            <div><a href="#"><span class="icon-calendar"></span> April 7, 2020</a></div>
-                            <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                            <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="block-21 mb-4 d-flex">
-                    <a class="img mr-4 rounded"
-                       style="background-image: url(/resources/petsitting-master/images/image_2.jpg);"></a>
-                    <div class="text">
-                        <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                        <div class="meta">
-                            <div><a href="#"><span class="icon-calendar"></span> April 7, 2020</a></div>
-                            <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                            <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                        </div>
-                    </div>
+                농협 000-0000-0000<br>예금주 (주)펫밀리
+
                 </div>
             </div>
             <div class="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
-                <h2 class="footer-heading">Quick Links</h2>
+                <h2 class="footer-heading">Menu</h2>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="py-2 d-block">Home</a></li>
-                    <li><a href="#" class="py-2 d-block">About</a></li>
-                    <li><a href="#" class="py-2 d-block">Services</a></li>
-                    <li><a href="#" class="py-2 d-block">Works</a></li>
-                    <li><a href="#" class="py-2 d-block">Blog</a></li>
-                    <li><a href="#" class="py-2 d-block">Contact</a></li>
+                    <li><a href="/" class="py-2 d-block">홈</a></li>
+                    <li><a href="/abandoned_animal/list" class="py-2 d-block">유기동물 조회</a></li>
+                    <li><a href="/findBoard/list" class="py-2 d-block">반려동물 찾아요</a></li>
+                    <li><a href="/lookBoard/list" class="py-2 d-block">유기동물 봤어요</a></li>
+                    <li><a href="/board/list?kindOfBoard=자유&sort=bno" class="py-2 d-block">게시판</a></li>
+                    <li><a href="/member/auth/mypage" class="py-2 d-block">마이페이지</a></li>
                 </ul>
             </div>
             <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
-                <h2 class="footer-heading">Have a Questions?</h2>
+                <h2 class="footer-heading">Company Info</h2>
                 <div class="block-23 mb-3">
                     <ul>
-                        <li><span class="icon fa fa-map"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span>
+                        <li><span class="icon fa fa-map"></span><span class="text">서울특별시 강남구 테헤란로14길 6 남도빌딩 2층, 3층, 4층</span>
                         </li>
-                        <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+2 392 3929 210</span></a>
+                        <li><span class="icon fa fa-phone"></span><span class="text">1544-9970</span>
                         </li>
-                        <li><a href="#"><span class="icon fa fa-paper-plane"></span><span class="text">info@yourdomain.com</span></a>
+                        <li><span class="icon fa fa-paper-plane"></span><span class="text">petmily@gmail.com</span>
                         </li>
                     </ul>
                 </div>
