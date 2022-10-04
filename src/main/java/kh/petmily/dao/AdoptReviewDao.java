@@ -79,4 +79,8 @@ public class AdoptReviewDao implements BasicDao {
     public List<AdoptReview> selectAll(String kindOfBoard) {
         return mapper.selectAll(kindOfBoard);
     }
+
+    public List<AdoptReview> selectPreview() {
+        return mapper.selectPreview();
+    }
 }

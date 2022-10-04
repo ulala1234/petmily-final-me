@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <style>
@@ -404,55 +405,25 @@ scroll-behavior: smooth;
     <div class="container">
         <div class="row justify-content-center pb-5 mb-3">
             <div class="col-md-7 heading-section text-center ftco-animate">
-                <h2>오늘의 입양 후기</h2>
+                <h2>최근 입양 후기</h2>
             </div>
         </div>
+
         <div class="row d-flex">
-            <div class="col-md-4 d-flex ftco-animate">
-                <div class="blog-entry align-self-stretch">
-                    <a href="blog-single.html" class="block-20 rounded"
-                       style="background-image: url('/resources/petsitting-master/images/image_1.jpg');">
-                    </a>
-                    <div class="text p-4">
-                        <div class="meta mb-2">
-                            <div><a href="#">April 07, 2020</a></div>
-                            <div><a href="#">Admin</a></div>
-                            <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
+            <c:forEach var="board" items="${detailForm}">
+                <div class="col-md-4">
+                    <div class="blog-entry align-self-stretch">
+                      <a href="/adopt_review/detail?kindOfBoard=${param.kindOfBoard}&bNumber=${board.getBNumber()}" class="block-20 rounded" style="background-image: url('/adopt_review/upload?filename=${board.imgPath}')"></a>
+                        <div class="text p-4">
+                            <div class="meta mb-2">
+                                <div><i class="far fa-eye"></i>date ${board.wrTime}</div><br/>
+                                <div><i class="far fa-eye"></i>by<a href="javascript:void(0)"> ${board.name}</a></div>
+                            </div>
+                                <a href="/adopt_review/detail?kindOfBoard=${param.kindOfBoard}&bNumber=${board.getBNumber()}"><h3 class="heading">${board.title}</h6></a>
                         </div>
-                        <h3 class="heading"><a href="#">저희집 자랑이 된 몽실이를 소개합니다!</a></h3>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 d-flex ftco-animate">
-                <div class="blog-entry align-self-stretch">
-                    <a href="blog-single.html" class="block-20 rounded"
-                       style="background-image: url('/resources/petsitting-master/images/gallery-12.jpg');">
-                    </a>
-                    <div class="text p-4">
-                        <div class="meta mb-2">
-                            <div><a href="#">April 07, 2020</a></div>
-                            <div><a href="#">Admin</a></div>
-                            <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
-                        </div>
-                        <h3 class="heading"><a href="#">사랑둥이 치치에요 이 아이가 가져다준 행복이 너무 큽니다</a></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 d-flex ftco-animate">
-                <div class="blog-entry align-self-stretch">
-                    <a href="blog-single.html" class="block-20 rounded"
-                       style="background-image: url('/resources/petsitting-master/images/image_3.jpg');">
-                    </a>
-                    <div class="text p-4">
-                        <div class="meta mb-2">
-                            <div><a href="#">April 07, 2020</a></div>
-                            <div><a href="#">Admin</a></div>
-                            <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
-                        </div>
-                        <h3 class="heading"><a href="#">저희집 고양이가 세상에서 제일 귀여워요</a></h3>
-                    </div>
-                </div>
-            </div>
+            </c:forEach>
         </div>
     </div>
 </section>
