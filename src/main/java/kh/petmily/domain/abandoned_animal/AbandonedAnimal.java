@@ -114,14 +114,6 @@ public class AbandonedAnimal implements DomainObj {
         this.animalState = animalState;
     }
 
-    public AbandonedAnimal(String name, String species, int age, String imgPath, String description) {
-        this.name = name;
-        this.species = species;
-        this.age = age;
-        this.imgPath = imgPath;
-        this.description = description;
-    }
-
     public void setAbNumber(int abNumber) {
         this.abNumber = abNumber;
     }

@@ -2,7 +2,10 @@ package kh.petmily.service;
 
 import kh.petmily.dao.AbandonedAnimalDao;
 import kh.petmily.domain.abandoned_animal.AbandonedAnimal;
-import kh.petmily.domain.abandoned_animal.form.*;
+import kh.petmily.domain.abandoned_animal.form.AbandonedAnimalDetailForm;
+import kh.petmily.domain.abandoned_animal.form.AbandonedAnimalModifyForm;
+import kh.petmily.domain.abandoned_animal.form.AbandonedAnimalPageForm;
+import kh.petmily.domain.abandoned_animal.form.AbandonedAnimalWriteForm;
 import kh.petmily.domain.pet.Pet;
 import kh.petmily.domain.pet.form.PetPageForm;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -215,16 +217,5 @@ public class AbandonedAnimalServiceImpl implements AbandonedAnimalService {
                 modReq.getDescription(),
                 modReq.getAnimalState()
         );
-    }
-    @Override
-    public List<OldAbandonedAnimalListForm> oldAbandonedList() {
-        List<OldAbandonedAnimalListForm> list =new ArrayList<>();
-        List<AbandonedAnimal> abList = abandonedAnimalDao.oldAbandonedList();
-
-        for (AbandonedAnimal a : abList){
-            OldAbandonedAnimalListForm od = new OldAbandonedAnimalListForm(a.getDescription(), a.getImgPath(), a.getName(), a.getAge(), a.getSpecies());
-            list.add(od);
-        }
-        return list;
     }
 }
