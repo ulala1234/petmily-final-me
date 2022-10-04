@@ -57,7 +57,7 @@
                 <h6 class="mt-1"></h6>
                 <small><a href="javascript:void(0)">${detailForm.name}</a></small>
                 <small><i class="far fa-comment ml-2"></i> date ${detailForm.wrTime} </small>
-                <small><i class="far fa-comment ml-2"></i> 조회 ${detailForm.viewCount} </small>
+                <small><i class="far fa-comment ml-2"></i> 조회수: ${detailForm.viewCount} </small>
 
                 <!-- content 내용 -->
 

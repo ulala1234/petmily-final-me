@@ -92,7 +92,7 @@ pageEncoding="UTF-8" %>
                                 <br/>
                                 <div><i class="far fa-eye"></i>by<a href="javascript:void(0)"> ${board.name}</a></div>
                                 <br/>
-                                <div><i class="far fa-eye"></i>조회: ${board.viewCount}</div>
+                                <div><i class="far fa-eye"></i>조회수: ${board.viewCount}</div>
                             </div>
                             <a href="/adopt_review/detail?kindOfBoard=${param.kindOfBoard}&bNumber=${board.getBNumber()}">
                                 <h3 class="heading">${board.title}</h6></a>

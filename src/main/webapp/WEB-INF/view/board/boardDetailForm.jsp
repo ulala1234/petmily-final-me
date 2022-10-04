@@ -71,7 +71,7 @@
                         <h6 class="mt-1"></h6>
                         <small><a href="javascript:void(0)">${detailForm.name}</a></small>
                         <small><i class="far fa-comment ml-2"></i> date ${detailForm.wrTime} </small>
-                        <small><i class="far fa-comment ml-2"></i> 조회: ${detailForm.viewCount} </small>
+                        <small><i class="far fa-comment ml-2"></i> 조회수: ${detailForm.viewCount} </small>
 
                         <c:if test="${param.kindOfBoard eq '문의'}">
                             <c:if test="${detailForm.checkPublic eq 'Y'}">
@@ -86,7 +86,7 @@
 
                         <!-- content 내용 -->
 
-                        <div class="mt-3 font-size-lg" style="font-size: 1.3em">${detailForm.content}</div>
+                        <div class="mt-3 font-size-lg" style="font-size: 1.3em; color:black">${detailForm.content}</div>
                         <h1 class="mt-1"></h1>
 
                         <div class="modal-header"></div>
@@ -180,7 +180,7 @@
                 <button data-toggle="modal" data-target="#modifyModal" class="btn btn-light"> 수정 및 삭제</button>
                 {{/if}}
             </div>
-            <h5 class="timeline-body">{{reply}}</h5>
+            <h6 class="timeline-body" style="color:black">{{reply}}</h6>
         </div>
     </li>
     {{/each}}

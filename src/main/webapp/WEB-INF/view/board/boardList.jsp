@@ -134,10 +134,10 @@ pageEncoding="UTF-8" %>
                             </c:if>
 
                             <div>
-                                조회: ${board.viewCount}
+                                조회수: ${board.viewCount}
                             </div>
                             <div>
-                                댓글: ${board.replyCount}
+                                댓글수: ${board.replyCount}
                             </div>
                         </div>
 
