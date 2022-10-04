@@ -4,10 +4,7 @@ import kh.petmily.dao.AdoptReviewDao;
 import kh.petmily.dao.MemberDao;
 import kh.petmily.domain.admin.form.AdminBoardListForm;
 import kh.petmily.domain.adopt_review.AdoptReview;
-import kh.petmily.domain.adopt_review.form.AdoptReviewForm;
-import kh.petmily.domain.adopt_review.form.AdoptReviewModifyForm;
-import kh.petmily.domain.adopt_review.form.AdoptReviewWriteForm;
-import kh.petmily.domain.adopt_review.form.BoardPage;
+import kh.petmily.domain.adopt_review.form.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -166,5 +163,19 @@ public class AdoptReviewServiceImpl implements AdoptReviewService {
     @Override
     public String findName(int mNumber) {
         return memberDao.selectName(mNumber);
+    }
+
+
+    @Override
+    public List<AdoptReviewPreviewForm> selectPreview() {
+        List<AdoptReviewPreviewForm> list = new ArrayList<>();
+        List<AdoptReview> adoptReviewList = adoptReviewDao.selectPreview();
+
+        for (AdoptReview b : adoptReviewList) {
+            AdoptReviewPreviewForm ad = new AdoptReviewPreviewForm(b.getBNumber(), findName(b.getMNumber()), b.getWrTime(), b.getTitle(), b.getImgPath());
+            list.add(ad);
+        }
+
+        return list;
     }
 }

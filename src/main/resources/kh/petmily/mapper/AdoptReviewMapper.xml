@@ -106,4 +106,17 @@
         set VIEWCOUNT = VIEWCOUNT + 1
         where BNUMBER = #{bNumber}
     </update>
+
+    <select id="selectPreview" resultType="kh.petmily.domain.adopt_review.AdoptReview">
+        select *
+        from
+        (
+        select B.*, M.NAME
+        from MEMBER M inner join BOARD B
+        on M.MNUMBER = B.MNUMBER
+        where KINDOFBOARD = '입양후기'
+        order by BNUMBER DESC
+        )
+        where rownum <![CDATA[<]]> 4
+    </select>
 </mapper>
