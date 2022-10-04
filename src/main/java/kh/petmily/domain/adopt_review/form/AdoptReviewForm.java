@@ -6,6 +6,7 @@ import java.sql.Date;
 
 @Data
 public class AdoptReviewForm {
+
     private int bNumber;
     private int mNumber;
     private String name;
@@ -31,6 +32,4 @@ public class AdoptReviewForm {
         this.viewCount = viewCount;
         this.replyCount = replyCount;
     }
-
-
 }

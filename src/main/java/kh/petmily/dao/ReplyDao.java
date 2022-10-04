@@ -39,4 +39,12 @@ public class ReplyDao implements BasicDao {
 
         return list;
     }
+
+    public int selectCount(int bNumber) {
+        return mapper.selectCount(bNumber);
+    }
+
+    public int getBNumber(int pk) {
+        return mapper.getBNumber(pk);
+    }
 }

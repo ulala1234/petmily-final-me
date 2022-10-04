@@ -7,7 +7,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="/css/freeBoard.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/resources/petsitting-master/css/animate.css">
     <link rel="stylesheet" href="/resources/petsitting-master/css/owl.carousel.min.css">
@@ -42,7 +43,8 @@
                 </c:if>
                 <c:if test="${param.kindOfBoard eq '문의'}">
                     <p class="breadcrumbs mb-2">
-                        <span class="mr-2"><span>Inquiry Board - Detail<i class="ion-ios-arrow-forward"></i></span></span>
+                        <span class="mr-2"><span>Inquiry Board - Detail<i
+                                class="ion-ios-arrow-forward"></i></span></span>
                     </p>
                     <h1 class="mb-0 bread">문의 게시판 - 상세보기</h1>
                 </c:if>
@@ -69,6 +71,7 @@
                         <h6 class="mt-1"></h6>
                         <small><a href="javascript:void(0)">${detailForm.name}</a></small>
                         <small><i class="far fa-comment ml-2"></i> date ${detailForm.wrTime} </small>
+                        <small><i class="far fa-comment ml-2"></i> 조회수: ${detailForm.viewCount} </small>
 
                         <c:if test="${param.kindOfBoard eq '문의'}">
                             <c:if test="${detailForm.checkPublic eq 'Y'}">
@@ -83,7 +86,7 @@
 
                         <!-- content 내용 -->
 
-                        <div class="mt-3 font-size-lg">${detailForm.content}</div>
+                        <div class="mt-3 font-size-lg" style="font-size: 1.3em; color:black">${detailForm.content}</div>
                         <h1 class="mt-1"></h1>
 
                         <div class="modal-header"></div>
@@ -142,6 +145,7 @@
                                             <div class="panel-body">
                                                 <div class="form-group">
                                                     <label for="message">댓글</label>
+                                                    <small id="replyCount"> [${detailForm.replyCount}] </small>
                                                     <textarea name="reply" id="message1" cols="30" rows="3"
                                                               class="form-control"
                                                               placeholder="댓글을 작성해주세요."></textarea>
@@ -171,13 +175,12 @@
     {{#each .}}
     <li class="replyLi" data-brNumber={{brNumber}} style="list-style-type: none">
         <div class="timeline-item">
-            <div class="timeline-header"><strong>{{writer}}</strong> - {{wrTime}}</div>
-            <h5 class="timeline-body">{{reply}}</h5>
-            <div class="timeline-footer">
+            <div class="timeline-header"><strong>{{writer}}</strong> - {{wrTime}}
                 {{#if sameWriter}}
                 <button data-toggle="modal" data-target="#modifyModal" class="btn btn-light"> 수정 및 삭제</button>
                 {{/if}}
             </div>
+            <h6 class="timeline-body" style="color:black">{{reply}}</h6>
         </div>
     </li>
     {{/each}}
@@ -191,7 +194,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title"></h4>
             </div>
-            <div class="modal-body" data-rno>
+            <div class="modal-body" data-brNumber>
                 <p><input type="text" id="reply" class="form-control"></p>
             </div>
             <div class="modal-footer">
@@ -212,9 +215,10 @@
 
     function getPage(pageInfo) {
         $.getJSON(pageInfo, function (data) {
-            printData(data, $("#repliesDiv"), $('#template'));
+            printData(data.list, $("#repliesDiv"), $('#template'));
 
             $("#modifyModal").modal('hide');
+            $("#replyCount").html("[ " + data.replyCount +" ]");
         });
     }
 

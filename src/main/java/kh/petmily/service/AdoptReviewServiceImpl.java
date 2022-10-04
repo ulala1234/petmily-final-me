@@ -41,6 +41,7 @@ public class AdoptReviewServiceImpl implements AdoptReviewService {
 
     @Override
     public AdoptReviewForm getAdoptReview(int bNumber) {
+        adoptReviewDao.updateViewCount(bNumber);
         AdoptReview arForm = adoptReviewDao.findByPk(bNumber);
 
         return new AdoptReviewForm(
@@ -88,11 +89,6 @@ public class AdoptReviewServiceImpl implements AdoptReviewService {
     @Override
     public String boardName(int bNumber) {
         return adoptReviewDao.selectName(bNumber);
-    }
-
-    @Override
-    public int updateViewCount(int bNumber) {
-        return adoptReviewDao.updateViewCount(bNumber);
     }
 
     private AdoptReview toAdoptReview(AdoptReviewWriteForm req) {

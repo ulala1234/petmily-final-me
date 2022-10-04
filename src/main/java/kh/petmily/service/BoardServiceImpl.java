@@ -40,7 +40,9 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public ReadBoardForm getBoard(int bNumber) {
+        boardDao.updateViewCount(bNumber);
         Board readBoardForm = boardDao.findByPk(bNumber);
+
         String memberName = memberDao.selectName(readBoardForm.getMNumber());
         readBoardForm.setName(memberName);
 
@@ -54,6 +56,7 @@ public class BoardServiceImpl implements BoardService {
                 readBoardForm.getWrTime(),
                 readBoardForm.getCheckPublic(),
                 readBoardForm.getViewCount(),
+                readBoardForm.getReplyCount(),
                 readBoardForm.getSort()
         );
     }
@@ -74,11 +77,6 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public void delete(int bNumber) {
         boardDao.delete(bNumber);
-    }
-
-    @Override
-    public int updateViewCount(int bNumber) {
-        return boardDao.updateViewCount(bNumber);
     }
 
     @Override

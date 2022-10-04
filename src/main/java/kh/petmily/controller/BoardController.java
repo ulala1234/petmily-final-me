@@ -45,7 +45,6 @@ public class BoardController {
     @GetMapping("/detail")
     public String detail(@RequestParam("bNumber") int bNumber, Model model) {
         ReadBoardForm detailForm = boardService.getBoard(bNumber);
-        boardService.updateViewCount(bNumber);
 
         model.addAttribute("detailForm", detailForm);
 

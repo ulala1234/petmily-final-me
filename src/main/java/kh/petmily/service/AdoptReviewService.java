@@ -26,8 +26,6 @@ public interface AdoptReviewService {
 
     public String boardName(int bNumber);
 
-    public int updateViewCount(int bNumber);
-
     public String storeFile(MultipartFile file, String filePath) throws IOException;
 
     public List<AdminBoardListForm> selectAll(String kindOfBoard);

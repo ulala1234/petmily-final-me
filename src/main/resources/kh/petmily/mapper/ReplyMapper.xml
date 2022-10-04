@@ -19,7 +19,7 @@
     <update id="update">
         update BOARDREPLY
         set REPLY = #{reply}
-        where BRNUMBER = #{brNumber}
+        where BRNUMBER = #{pk}
     </update>
 
     <delete id="delete">
@@ -34,5 +34,17 @@
         from BOARDREPLY
         where BNUMBER = #{bNumber}
         order by brNumber desc
+    </select>
+
+    <select id="selectCount" resultType="int">
+        select count(BNUMBER)
+        from BOARDREPLY
+        where BNUMBER = #{bNumber}
+    </select>
+
+    <select id="getBNumber" resultType="int">
+        select BNUMBER
+        from BOARDREPLY
+        where BRNUMBER = #{pk}
     </select>
 </mapper>
