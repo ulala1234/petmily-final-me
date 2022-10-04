@@ -1,10 +1,7 @@
 package kh.petmily.service;
 
 import kh.petmily.domain.abandoned_animal.AbandonedAnimal;
-import kh.petmily.domain.abandoned_animal.form.AbandonedAnimalDetailForm;
-import kh.petmily.domain.abandoned_animal.form.AbandonedAnimalModifyForm;
-import kh.petmily.domain.abandoned_animal.form.AbandonedAnimalPageForm;
-import kh.petmily.domain.abandoned_animal.form.AbandonedAnimalWriteForm;
+import kh.petmily.domain.abandoned_animal.form.*;
 import kh.petmily.domain.pet.Pet;
 import kh.petmily.domain.pet.form.PetPageForm;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,9 +17,9 @@ public interface AbandonedAnimalService {
 
     public AbandonedAnimalPageForm getAbandonedAnimalPage(int pageNo, String species, String gender, String animalState, String keyword);
 
-    PetPageForm getPetPage(int pageNo);
+    public PetPageForm getPetPage(int pageNo);
 
-    String findName(int abNumber);
+    public String findName(int abNumber);
 
     List<AbandonedAnimal> selectAll();
 
@@ -36,9 +33,11 @@ public interface AbandonedAnimalService {
 
     public void delete(int abNumber);
 
-    void savePet(Pet pet);
+    public void savePet(Pet pet);
 
-    void modifyPet(Pet pet);
+    public void modifyPet(Pet pet);
 
-    void deletePet(int cpNumber);
+    public void deletePet(int cpNumber);
+
+    List<OldAbandonedAnimalListForm> oldAbandonedList();
 }

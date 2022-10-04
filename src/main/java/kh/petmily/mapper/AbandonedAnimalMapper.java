@@ -45,4 +45,6 @@ public interface AbandonedAnimalMapper {
     void updatePet(Pet pet);
 
     void deletePet(int cpNumber);
+
+    List<AbandonedAnimal> oldAbandonedList();
 }
