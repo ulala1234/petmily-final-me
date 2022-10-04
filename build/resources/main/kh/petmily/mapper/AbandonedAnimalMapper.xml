@@ -161,4 +161,11 @@
         from pet
         where CPNUMBER = #{cpNumber}
     </delete>
+
+    <select id="oldAbandonedList" resultType="kh.petmily.domain.abandoned_animal.AbandonedAnimal">
+        SELECT *
+        FROM (SELECT DESCRIPTION, IMGPATH, NAME, AGE, SPECIES FROM ABANDONEDANIMAL
+        ORDER BY ADMISSIONDATE ASC)
+        WHERE ROWNUM  <![CDATA[<]]> 6
+    </select>
 </mapper>
