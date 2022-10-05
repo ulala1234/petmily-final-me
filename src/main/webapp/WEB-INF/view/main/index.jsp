@@ -310,91 +310,26 @@ scroll-behavior: smooth;
         <div class="row ftco-animate">
             <div class="col-md-12">
                 <div class="carousel-testimony owl-carousel ftco-owl">
+                <c:forEach var="list" items="${listForm}">
                     <div class="item">
                         <div class="testimony-wrap py-4">
                             <div class="icon d-flex align-items-center justify-content-center"><span
                                     class="fa fa-quote-left"></span></div>
                             <div class="text">
-                                <p class="mb-4">얌전하고 잘 짖지 않는 강아지입니다. 사람의 손길을 그리워해서 쓰다듬어주는걸 좋아합니다.</p>
+                                <p class="mb-4">${list.description}</p>
                                 <div class="d-flex align-items-center">
                                     <div class="user-img"
-                                         style="background-image: url('/resources/petsitting-master/images/abani-01.jpg')"></div>
+                                         style="background-image: url('/admin/upload?filename=${list.imgPath}')"></div>
                                     <div class="pl-3">
-                                        <p class="name">바둑이(3년 추정)</p>
-                                        <span class="position">강아지 - 비숑</span>
+                                        <p class="name">${list.name}</p>
+                                        <p class="age">${list.age}살</p>
+                                        <span class="position">${list.species}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="testimony-wrap py-4">
-                            <div class="icon d-flex align-items-center justify-content-center"><span
-                                    class="fa fa-quote-left"></span></div>
-                            <div class="text">
-                                <p class="mb-4">사람을 좋아하는 수다쟁이에 애교쟁이 고양이입니다. 비 오는 날 안양 동안구 하천 아래에서 발견되었습니다. </p>
-                                <div class="d-flex align-items-center">
-                                    <div class="user-img"
-                                         style="background-image: url('/resources/petsitting-master/images/abani-02.jpg')"></div>
-                                    <div class="pl-3">
-                                        <p class="name">코코(6개월 추정)</p>
-                                        <span class="position">고양이 - 코리안 숏헤어</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimony-wrap py-4">
-                            <div class="icon d-flex align-items-center justify-content-center"><span
-                                    class="fa fa-quote-left"></span></div>
-                            <div class="text">
-                                <p class="mb-4">얌전하고 잘 짖지 않는 강아지입니다. 사람의 손길을 그리워해서 쓰다듬어주는걸 좋아합니다.</p>
-                                <div class="d-flex align-items-center">
-                                    <div class="user-img"
-                                         style="background-image: url('/resources/petsitting-master/images/abani-03.jpg')"></div>
-                                    <div class="pl-3">
-                                        <p class="name">몽실이(5년 추정)</p>
-                                        <span class="position">강아지 - 삽살견</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimony-wrap py-4">
-                            <div class="icon d-flex align-items-center justify-content-center"><span
-                                    class="fa fa-quote-left"></span></div>
-                            <div class="text">
-                                <p class="mb-4">사람을 좋아하는 수다쟁이에 애교쟁이 고양이입니다. 비 오는 날 안양 동안구 하천 아래에서 발견되었습니다.</p>
-                                <div class="d-flex align-items-center">
-                                    <div class="user-img"
-                                         style="background-image: url('/resources/petsitting-master/images/abani-04.jpg')"></div>
-                                    <div class="pl-3">
-                                        <p class="name">시루(1년 추정)</p>
-                                        <span class="position">강아지 - 말티즈</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimony-wrap py-4">
-                            <div class="icon d-flex align-items-center justify-content-center"><span
-                                    class="fa fa-quote-left"></span></div>
-                            <div class="text">
-                                <p class="mb-4">사람을 좋아하는 수다쟁이에 애교쟁이 고양이입니다. 비 오는 날 안양 동안구 하천 아래에서 발견되었습니다.</p>
-                                <div class="d-flex align-items-center">
-                                    <div class="user-img"
-                                         style="background-image: url('/resources/petsitting-master/images/abani-05.jpg')"></div>
-                                    <div class="pl-3">
-                                        <p class="name">치즈(1년 추정)</p>
-                                        <span class="position">고양이 - 코리안 숏헤어</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                </c:forEach>
                 </div>
             </div>
         </div>
