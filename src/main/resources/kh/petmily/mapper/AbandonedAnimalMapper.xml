@@ -73,8 +73,8 @@
 
     <select id="selectIndex" resultType="kh.petmily.domain.abandoned_animal.AbandonedAnimal">
         select * from
-            (select ROWNUM as NUM, A.* FROM
-                    (select * from ABANDONEDANIMAL order by ABNUMBER DESC) A)
+        (select ROWNUM as NUM, A.* FROM
+        (select * from ABANDONEDANIMAL order by ABNUMBER DESC) A)
         where NUM between #{start} and #{end}
     </select>
 
@@ -137,7 +137,7 @@
     <select id="selectPetIndex" resultType="kh.petmily.domain.pet.Pet">
         select *
         from (select ROWNUM as NUM, a.*
-              FROM (select p.*,m.Id as userId from Pet p left join MEMBER m on p.MNUMBER=m.MNUMBER  order by CPNUMBER DESC) a)
+        FROM (select p.*,m.Id as userId from Pet p left join MEMBER m on p.MNUMBER=m.MNUMBER  order by CPNUMBER DESC) a)
         where NUM between #{start} and #{end}
     </select>
 
@@ -149,10 +149,10 @@
     <update id="updatePet">
         update Pet
         set MNUMBER =(select  m.MNUMBER from MEMBER m where m.ID=#{userId}),
-            NAME=#{name},
-            SPECIES=#{species},
-            KIND=#{kind},
-            GENDER=#{gender}
+        NAME=#{name},
+        SPECIES=#{species},
+        KIND=#{kind},
+        GENDER=#{gender}
         where CPNUMBER = #{cpNumber}
     </update>
 
@@ -161,4 +161,11 @@
         from pet
         where CPNUMBER = #{cpNumber}
     </delete>
+
+    <select id="oldAbandonedList" resultType="kh.petmily.domain.abandoned_animal.AbandonedAnimal">
+        SELECT *
+        FROM (SELECT DESCRIPTION, IMGPATH, NAME, AGE, SPECIES FROM ABANDONEDANIMAL
+        ORDER BY ADMISSIONDATE ASC)
+        WHERE ROWNUM  <![CDATA[<]]> 6
+    </select>
 </mapper>
