@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="/resources/css/join.css">
     <script src="/resources/js/joinCheck.js"></script>
 </head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
 <body>
 
 <div class="section">
@@ -51,9 +54,13 @@
                             <input type="date" name="birth" placeholder="생년월일" required="required">
                             <input type="text" name="gender" placeholder="성별(F or M 입력)" required="required"
                                    oninput="this.value = this.value.replace(/[^FM]/g, '');" maxlength="1">
-                            <input type="text" name="email" placeholder="이메일 주소" required="required"
+                            <input type="text" name="email" id="email" placeholder="이메일 주소" required="required"
                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                             <p class="login-text">이메일 형식으로 입력하세요</p>
+                            <input type="button" name="sendEmail" id="sendEmail" class="btn btn-lg btn-block btn-success" value="이메일 인증하기">
+                            <input type="text" name="verificationCode" placeholder="인증번호를 입력해주세요" required="required">
+                            <input type="button" name="emailCode" id="emailCode" class="btn btn-lg btn-block btn-success" value="인증번호 확인">
+                            <p id="emailCode-text">인증되지 않았습니다.</p>
                             <input type="tel" name="phone" placeholder="연락처" required="required"
                                    pattern="^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$"
                                    oninput="this.value = this.value.replace(/[^0-9-]/g, '');">
@@ -72,5 +79,29 @@
         </div>
     </div>
 </div>
+
+<script>
+
+    $("#sendEmail").on("click", function () {
+        const emailAuth = {
+            email: document.getElementById('email').value
+        };
+
+        $.ajax({
+            type:'post',
+            url:'/join/mailCheck',
+            contentType: 'application/json',
+            dataType: 'text',
+            data:JSON.stringify(emailAuth),
+            success: function(result){
+                alert("인증번호를 해당 이메일로 발송했습니다.\n확인해주세요.");
+            },
+            error: function(request, status, error) {
+                alert("인증번호 전송 실패하였습니다.\n작성된 메일을 다시 확인해주세요.");
+            }
+        });
+    });
+</script>
+
 </body>
 </html>

@@ -12,10 +12,29 @@
 spring:
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@petmily_medium?TNS_ADMIN=/Users/joojongbum/oracle_db/Wallet_petmily/
-    username: jjb1
+    url: jdbc:oracle:thin:@petmily_medium?TNS_ADMIN=C:/wallet/Wallet_petmily/
+    username: ADMIN
     password: Petmilymember1
   mvc:
     view:
       prefix: /WEB-INF/view/
       suffix: .jsp
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: "메일주소"
+    password: "비밀번호"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          timeout: 5000
+          starttls:
+            enable: true
+            required: true
+  thymeleaf:
+    cache: false
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+    view-names: thymeleaf/*

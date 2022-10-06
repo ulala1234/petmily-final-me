@@ -4,22 +4,22 @@ import kh.petmily.domain.adopt.form.AdoptApplyPageForm;
 import kh.petmily.domain.find_board.FindBoard;
 import kh.petmily.domain.find_board.form.FindBoardPageForm;
 import kh.petmily.domain.look_board.form.LookBoardPageForm;
+import kh.petmily.domain.mail.EmailAuthRequest;
 import kh.petmily.domain.member.Member;
 import kh.petmily.domain.member.form.JoinRequest;
 import kh.petmily.domain.member.form.MemberChangeForm;
 import kh.petmily.domain.temp.form.TempApplyPageForm;
-import kh.petmily.service.AdoptTempService;
-import kh.petmily.service.FindBoardService;
-import kh.petmily.service.LookBoardService;
-import kh.petmily.service.MemberService;
+import kh.petmily.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +32,7 @@ public class MemberController {
     private final FindBoardService findBoardService;
     private final LookBoardService lookBoardService;
     private final AdoptTempService adoptTempService;
+    private final EmailService emailService;
 
     // 회원 가입
     @GetMapping("/join")
@@ -50,6 +51,15 @@ public class MemberController {
         memberService.join(joinRequest);
 
         return "/login/loginForm";
+    }
+
+    @ResponseBody
+    @PostMapping("/join/mailCheck")
+    public String mailCheck(@RequestBody EmailAuthRequest email) throws MessagingException {
+        log.info("email : {}", email);
+        String authCode = emailService.sendEmail(email.getEmail());
+
+        return authCode;
     }
 
     // 로그인
