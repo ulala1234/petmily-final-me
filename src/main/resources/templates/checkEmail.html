@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Petmily 이메일 확인</title>
+</head>
+<body>
+<h4>Petmily 회원가입 이메일 인증 코드입니다.</h4>
+<p>아래 코드를 회원가입 창에 입력해주세요.</p>
+<div align="center" style="border:1px solid blue;">
+    <p>인증 번호 : </p>
+    <span style="font-size: large" th:text="${code}"> </span>
+</div>
+</body>
+</html>
