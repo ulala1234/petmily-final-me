@@ -99,7 +99,7 @@ public class MemberController {
 
         request.getSession().setAttribute("authUser", authUser);
 
-        return "/main/index";
+        return "redirect:/";
     }
 
     // 로그아웃
@@ -107,7 +107,7 @@ public class MemberController {
     public String logout(HttpServletRequest request) {
         request.getSession().invalidate();
 
-        return "/main/index";
+        return "redirect:/";
     }
 
     @RequestMapping("/")
