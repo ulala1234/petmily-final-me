@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kh.petmily.mapper.EmailMapper">
+    <select id="getEmailCheck" resultType="kh.petmily.domain.mail.EmailCheck">
+        select *
+        from EMAILCHECK
+        where ADDRESS = #{address}
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*)
+        from EMAILCHECK
+        where ADDRESS = #{address}
+    </select>
+
+    <insert id="insertMailAuth">
+        insert into EMAILCHECK(ADDRESS, CODE)
+        values(#{address}, #{code})
+    </insert>
+
+    <select id="getCodeByEmail" resultType="String">
+        select CODE
+        from EMAILCHECK
+        where ADDRESS = #{address}
+    </select>
+
+    <update id="updateEmailCheck">
+        update EMAILCHECK
+        set CODE = #{code}
+          , IS_AUTH = 0
+        where ADDRESS = #{address}
+    </update>
+
+    <update id="completeCheck">
+        update EMAILCHECK
+        set IS_AUTH = 1
+        where ADDRESS = #{address}
+    </update>
+</mapper>

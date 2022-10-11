@@ -4,7 +4,9 @@ import kh.petmily.domain.adopt.form.AdoptApplyPageForm;
 import kh.petmily.domain.find_board.FindBoard;
 import kh.petmily.domain.find_board.form.FindBoardPageForm;
 import kh.petmily.domain.look_board.form.LookBoardPageForm;
-import kh.petmily.domain.mail.EmailAuthRequest;
+import kh.petmily.domain.mail.EmailCheck;
+import kh.petmily.domain.mail.form.EmailCodeRequest;
+import kh.petmily.domain.mail.form.EmailRequest;
 import kh.petmily.domain.member.Member;
 import kh.petmily.domain.member.form.JoinRequest;
 import kh.petmily.domain.member.form.MemberChangeForm;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,13 +56,23 @@ public class MemberController {
 
     @ResponseBody
     @PostMapping("/join/mailCheck")
-    public String mailCheck(@RequestBody EmailAuthRequest email) throws MessagingException {
-        log.info("email : {}", email);
-        String authCode = emailService.sendEmail(email.getEmail());
+    public String mailCheck(@RequestBody EmailRequest emailRequest) throws MessagingException {
+        log.info("email : {}", emailRequest);
+
+        String authCode = emailService.sendEmail(emailRequest.getAddress());
+        emailService.registEmailCheck(emailRequest.getAddress(), authCode);
 
         return authCode;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/join/codeCheck")
+    public int CodeCompare(@RequestBody EmailCodeRequest mailAuth) {
+        log.info("EmailCodeRequest: {}", mailAuth);
+        EmailCheck emailCheck = emailService.makeEmailCheck(mailAuth);
+
+        return emailCheck.getIs_Auth();
+    }
     // 로그인
     @GetMapping("/login")
     public String loginForm() {

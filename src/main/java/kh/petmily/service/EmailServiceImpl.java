@@ -1,7 +1,10 @@
 package kh.petmily.service;
 
-import kh.petmily.domain.email_check.EmailCheck;
+import kh.petmily.dao.EmailDao;
+import kh.petmily.domain.mail.EmailCheck;
+import kh.petmily.domain.mail.form.EmailCodeRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
@@ -13,10 +16,12 @@ import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class EmailServiceImpl implements EmailService {
     private final JavaMailSender emailSender;
     private final SpringTemplateEngine templateEngine;
     private String randVerificationCode;
+    private final EmailDao emailDao;
 
     public void createVerificationCode() {
         Random rand = new Random();
@@ -70,5 +75,31 @@ public class EmailServiceImpl implements EmailService {
         Context context = new Context();
         context.setVariable("code", code);
         return templateEngine.process("checkEmail", context);
+    }
+
+    @Override
+    public void registEmailCheck(String address, String code) {
+        int cnt = emailDao.getCount(address);
+
+        if(cnt == 0) {
+            emailDao.insertMailAuth(address, code);
+        }
+        else{
+            emailDao.updateEmailCheck(address, code);
+        }
+    }
+
+    @Override
+    public EmailCheck makeEmailCheck(EmailCodeRequest mailAuth) {
+        String code = emailDao.getCodeByEmail(mailAuth.getAddress());
+
+        if(code.equals(mailAuth.getCode())) {
+            emailDao.completeCheck(mailAuth.getAddress());
+        }
+
+        EmailCheck emailCheck = emailDao.getEmailCheck(mailAuth.getAddress());
+        log.info("EmailServiceImpl - makeEmailCheck : {} {} {}", emailCheck.getAddress(), emailCheck.getCode(), emailCheck.getIs_Auth());
+
+        return emailCheck;
     }
 }
