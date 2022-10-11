@@ -98,7 +98,9 @@ public class MemberController {
         }
 
         request.getSession().setAttribute("authUser", authUser);
-
+        if(authUser.getGrade().equals("관리자")) {
+            return "redirect:/admin";
+        }
         return "redirect:/";
     }
 
