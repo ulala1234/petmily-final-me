@@ -21,6 +21,10 @@ public interface MemberMapper {
 
     int selectmNumber(@Param("id") String id, @Param("pw") String pw);
 
+    int memberCheck(@Param("email") String email, @Param("id") String id);
+
+    void pwChange(Member member);
+
     Member selectMemberById(String id);
 
     String selectName(int pk);

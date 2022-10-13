@@ -3,8 +3,10 @@ package kh.petmily.service;
 import kh.petmily.dao.MemberDao;
 import kh.petmily.domain.member.Member;
 import kh.petmily.domain.member.form.*;
+import kh.petmily.mail.MailUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,7 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberDao memberDao;
     private int size = 5;
+    private final JavaMailSender mailSender;
 
     @Override
     public void join(JoinRequest joinReq) {
@@ -111,6 +114,39 @@ public class MemberServiceImpl implements MemberService {
         memberDao.update(member);
     }
 
+    @Override
+    public int memberCheck(String email, String id) {
+        return memberDao.memberCheck(email, id);
+    }
+
+    @Override
+    public void sendEmail(String email, String id) throws Exception {
+        MailUtils sendMail = new MailUtils(mailSender);
+
+        sendMail.setSubject("[Petmily 비밀번호 찾기 인증 메일입니다.]"); //메일제목
+        sendMail.setText(
+                "<h1>Petmily 메일인증</h1>" +
+                        "<br/>" + id + "님 " +
+                        "<br/>비밀번호 찾기를 통해 새 비밀번호로 변경하시려면" +
+                        "<br/>아래 [이메일 인증 확인]을 눌러주세요." +
+                        "<br/><a href='http://localhost:8080/member/pwChange?email=" + email +
+                        "&id=" + id +
+                        "' target='_blank'>이메일 인증 확인</a>");
+        sendMail.setFrom("eunji1570@gmail.com", "Petmily");
+        sendMail.setTo(email);
+        sendMail.send();
+    }
+
+    @Override
+    public Member pwChange(PwChangeRequest pwChangeRequest) {
+        Member member = toMember(pwChangeRequest);
+
+        memberDao.pwChange(member);
+        log.info("Service - pwChange - member ={}", member);
+
+        return member;
+    }
+
     private Member toMember(MemberCreateForm memberCreateForm) {
         Member member = new Member(memberCreateForm.getMNumber(), memberCreateForm.getId(), memberCreateForm.getPw(), memberCreateForm.getName(), (Date) memberCreateForm.getBirth(), memberCreateForm.getGender(), memberCreateForm.getEmail(), memberCreateForm.getPhone(), memberCreateForm.getGrade());
 
@@ -141,5 +177,13 @@ public class MemberServiceImpl implements MemberService {
         String phone = joinReq.getPhone();
 
         return new Member(id, pw, name, birth, gender, email, phone);
+    }
+
+    private Member toMember(PwChangeRequest pwChangeRequest) {
+        String id = pwChangeRequest.getId();
+        String pw = pwChangeRequest.getPw();
+        String email = pwChangeRequest.getEmail();
+
+        return new Member(id, pw, email);
     }
 }

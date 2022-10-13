@@ -34,6 +34,18 @@
         where ID = #{id} and PW = #{pw}
     </select>
 
+    <select id="memberCheck" resultType="int">
+        select count(*)
+        from MEMBER
+        where EMAIL = #{email} and ID = #{id}
+    </select>
+
+    <update id="pwChange">
+        update MEMBER
+        set PW = #{pw}
+        where EMAIL = #{email} and ID = #{id}
+    </update>
+
     <select id="selectMemberById" resultType="kh.petmily.domain.member.Member">
         select *
         from MEMBER
@@ -81,7 +93,6 @@
         (select * from MEMBER order by MNUMBER DESC) M)
         where NUM between #{start} and #{end}
     </select>
-
 
     <select id="selectMemberId" resultType="java.lang.String">
         select ID
