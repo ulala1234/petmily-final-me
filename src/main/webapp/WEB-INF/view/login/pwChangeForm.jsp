@@ -14,36 +14,26 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,700" rel="stylesheet">
 </head>
 <body>
-
 <div class="section">
     <div class="container">
         <div class="form">
             <div class="left-side">
                 <div>
-                    <form action="/login" method="post">
+                    <form action="/pwChange" method="post">
                         <div class="login" id="login">
-                            <b><a href="${pageContext.request.contextPath}/"
-                                  style="text-decoration: none; color: black"><h2>Petmily</h2></a></b>
+                            <b><a style="text-decoration: none; color: black"><h4>비밀번호 찾기</h4></a></b>
                         </div>
                         <div class="form-inputs">
-                            <input type="text" name="id" placeholder="아이디" required="required"/>
+                            <input type="text" name="email" placeholder="이메일 주소" required="required"/>
                             <%-- <input type="text" placeholder="Email Address">--%>
-                            <div class="password">
-                                <input id="password" name="pw" type="password" placeholder="비밀번호" required="required"/>
-                                <span class="showpass" onclick="toggle()">
-                            <img id="changepasseye" src="https://i.imgur.com/d1M6y1W.jpg"> </span>
-                                <p class="random_password"></p>
+                            <div>
+                                <input id="text" name="id" type="id" placeholder="아이디" required="required"/>
                             </div>
                             <br>
-                            <div class="login">
-                                <div>
-                                    <button type="submit" class="btn btn-lg btn-block btn-success">로그인</button>
-                                    <br>
-                                    <div class="join"><a style="text-decoration:none" href="/join">회원가입</a>
-                                        <span>&ensp;</span>
-                                        <a style="text-decoration:none" href="/pwChange">비밀번호 찾기</a>
-                                    </div>
-                                </div>
+                            <div>
+                                <span><button type="button" class="btn btn-default"
+                                              onclick="location.href='/login'">취소</button></span>
+                                <span><button type="submit" class="btn btn-default btn-success">확인</button></span>
                             </div>
                         </div>
                     </form>
@@ -55,5 +45,14 @@
         </div>
     </div>
 </div>
+
+<script>
+var msg = "${msg}";
+
+		if (msg != "") {
+			alert(msg);
+		}
+
+</script>
 </body>
 </html>
