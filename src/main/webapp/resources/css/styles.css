@@ -3342,6 +3342,11 @@ textarea.form-control-lg {
   color: #198754;
   background-color: transparent;
 }
+.btn-sub {
+  color: #fff;
+  background-color: #0f5132;
+  border-color: #0f5132;
+}
 
 .btn-outline-info {
   color: #0dcaf0;

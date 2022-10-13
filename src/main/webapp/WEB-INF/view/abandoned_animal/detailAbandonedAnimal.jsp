@@ -189,22 +189,45 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 d-flex align-self-stretch px-4 ftco-animate">
-                <div class="d-block services text-center">
-                    <div class="icon d-flex align-items-center justify-content-center">
-                        <span class="flaticon-grooming"></span>
+
+            <c:choose>
+                <c:when test="${detailForm.getSNumber() == '0'}">
+                    <div class="col-md-4 d-flex align-self-stretch px-4 ftco-animate">
+                        <div class="d-block services text-center">
+                            <div class="icon d-flex align-items-center justify-content-center">
+                                <span class="flaticon-grooming"></span>
+                            </div>
+                            <div class="media-body p-4">
+                                <h3 class="heading">봉사하기</h3>
+                                <p>봉사할 수 없습니다.</p>
+                                <a
+                                    href=""
+                                    class="btn-custom d-flex align-items-center justify-content-center"><span
+                                    class="fa fa-chevron-right"></span><i class="sr-only">Read
+                                more</i></a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="media-body p-4">
-                        <h3 class="heading">봉사하기</h3>
-                        <p>봉사해주세요.</p>
-                        <a
-                                href="/abandoned_animal/auth/volunteer?abNumber=${param.abNumber}"
-                                class="btn-custom d-flex align-items-center justify-content-center"><span
-                                class="fa fa-chevron-right"></span><i class="sr-only">Read
-                            more</i></a>
+                </c:when>
+                <c:otherwise>
+                    <div class="col-md-4 d-flex align-self-stretch px-4 ftco-animate">
+                        <div class="d-block services text-center">
+                            <div class="icon d-flex align-items-center justify-content-center">
+                                <span class="flaticon-grooming"></span>
+                            </div>
+                            <div class="media-body p-4">
+                                <h3 class="heading">봉사하기</h3>
+                                <p>봉사해주세요.</p>
+                                <a
+                                    href="/abandoned_animal/auth/volunteer?abNumber=${param.abNumber}"
+                                    class="btn-custom d-flex align-items-center justify-content-center"><span
+                                    class="fa fa-chevron-right"></span><i class="sr-only">Read
+                                more</i></a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
 </section>

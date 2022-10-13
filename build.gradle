@@ -26,6 +26,7 @@ dependencies {
 	implementation 'com.oracle.database.security:osdt_cert'
 	implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
 	implementation 'javax.servlet:jstl'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'

@@ -31,4 +31,6 @@ public interface AdoptReviewMapper {
     int updateViewCount(int pk);
 
     List<AdoptReview> selectAll(String kindOfBoard);
+
+    List<AdoptReview> selectPreview();
 }

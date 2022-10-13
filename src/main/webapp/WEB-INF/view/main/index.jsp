@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
+<style>
+html{
+scroll-behavior: smooth;
+}
+</style>
 <head>
     <title>Petmily-Don't buy, Do Adopt</title>
     <meta charset="utf-8">
@@ -110,32 +116,33 @@
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="flaticon-stethoscope"></span></div>
                         <div class="text pl-3">
-                            <h4>about us-1</h4>
-                            <p>한 해에 수천마리의 동물이 유기되고 있습니다.</p>
+                            <h4>Petmily 가 하는 일</h4>
+                            <p>한 해에 수천마리의 동물이 유기되고 있습니다. Petmily는 그런 동물들의 구조와 입양을 돕고 있습니다.</p>
                         </div>
                     </div>
                     <div class="col-md-6 services-2 w-100 d-flex">
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="flaticon-customer-service"></span></div>
                         <div class="text pl-3">
-                            <h4>about us-2</h4>
-                            <p>사이트를 설계한 이유 목적</p>
+                            <h4>Petmily 설립 목적</h4>
+                            <p>Petmily는 인간에 의해 관리되는 모든 동물들이 인도적인 대우를 받게 하고자 하기 위해 설립되었습니다.</p>
                         </div>
                     </div>
                     <div class="col-md-6 services-2 w-100 d-flex">
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="flaticon-emergency-call"></span></div>
                         <div class="text pl-3">
-                            <h4>about us-3</h4>
-                            <p>도움 요청</p>
+                            <h4>저희를 도와주세요!</h4>
+                            <p>그런 동물들에게 따뜻한 가족이 되어주세요. 당신의 가족이 애타게 기다리고 있습니다.</p>
                         </div>
                     </div>
                     <div class="col-md-6 services-2 w-100 d-flex">
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="flaticon-veterinarian"></span></div>
                         <div class="text pl-3">
-                            <h4>about us-4</h4>
-                            <p>글글글</p>
+                            <h4>그들은 가족입니다.</h4>
+                            <p>#동물은물건이아닙니다<br>
+                               #우리의가족이고생명입니다</p>
                         </div>
                     </div>
                 </div>
@@ -303,91 +310,26 @@
         <div class="row ftco-animate">
             <div class="col-md-12">
                 <div class="carousel-testimony owl-carousel ftco-owl">
+                <c:forEach var="list" items="${listForm}">
                     <div class="item">
                         <div class="testimony-wrap py-4">
                             <div class="icon d-flex align-items-center justify-content-center"><span
                                     class="fa fa-quote-left"></span></div>
                             <div class="text">
-                                <p class="mb-4">얌전하고 잘 짖지 않는 강아지입니다. 사람의 손길을 그리워해서 쓰다듬어주는걸 좋아합니다.</p>
+                                <p class="mb-4">${list.description}</p>
                                 <div class="d-flex align-items-center">
                                     <div class="user-img"
-                                         style="background-image: url('/resources/petsitting-master/images/abani-01.jpg')"></div>
+                                         style="background-image: url('/admin/upload?filename=${list.imgPath}')"></div>
                                     <div class="pl-3">
-                                        <p class="name">바둑이(3년 추정)</p>
-                                        <span class="position">강아지 - 비숑</span>
+                                        <p class="name">${list.name}</p>
+                                        <p class="age">${list.age}살</p>
+                                        <span class="position">${list.species}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="testimony-wrap py-4">
-                            <div class="icon d-flex align-items-center justify-content-center"><span
-                                    class="fa fa-quote-left"></span></div>
-                            <div class="text">
-                                <p class="mb-4">사람을 좋아하는 수다쟁이에 애교쟁이 고양이입니다. 비 오는 날 안양 동안구 하천 아래에서 발견되었습니다. </p>
-                                <div class="d-flex align-items-center">
-                                    <div class="user-img"
-                                         style="background-image: url('/resources/petsitting-master/images/abani-02.jpg')"></div>
-                                    <div class="pl-3">
-                                        <p class="name">코코(6개월 추정)</p>
-                                        <span class="position">고양이 - 코리안 숏헤어</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimony-wrap py-4">
-                            <div class="icon d-flex align-items-center justify-content-center"><span
-                                    class="fa fa-quote-left"></span></div>
-                            <div class="text">
-                                <p class="mb-4">얌전하고 잘 짖지 않는 강아지입니다. 사람의 손길을 그리워해서 쓰다듬어주는걸 좋아합니다.</p>
-                                <div class="d-flex align-items-center">
-                                    <div class="user-img"
-                                         style="background-image: url('/resources/petsitting-master/images/abani-03.jpg')"></div>
-                                    <div class="pl-3">
-                                        <p class="name">몽실이(5년 추정)</p>
-                                        <span class="position">강아지 - 삽살견</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimony-wrap py-4">
-                            <div class="icon d-flex align-items-center justify-content-center"><span
-                                    class="fa fa-quote-left"></span></div>
-                            <div class="text">
-                                <p class="mb-4">사람을 좋아하는 수다쟁이에 애교쟁이 고양이입니다. 비 오는 날 안양 동안구 하천 아래에서 발견되었습니다.</p>
-                                <div class="d-flex align-items-center">
-                                    <div class="user-img"
-                                         style="background-image: url('/resources/petsitting-master/images/abani-04.jpg')"></div>
-                                    <div class="pl-3">
-                                        <p class="name">시루(1년 추정)</p>
-                                        <span class="position">강아지 - 말티즈</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimony-wrap py-4">
-                            <div class="icon d-flex align-items-center justify-content-center"><span
-                                    class="fa fa-quote-left"></span></div>
-                            <div class="text">
-                                <p class="mb-4">사람을 좋아하는 수다쟁이에 애교쟁이 고양이입니다. 비 오는 날 안양 동안구 하천 아래에서 발견되었습니다.</p>
-                                <div class="d-flex align-items-center">
-                                    <div class="user-img"
-                                         style="background-image: url('/resources/petsitting-master/images/abani-05.jpg')"></div>
-                                    <div class="pl-3">
-                                        <p class="name">치즈(1년 추정)</p>
-                                        <span class="position">고양이 - 코리안 숏헤어</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                </c:forEach>
                 </div>
             </div>
         </div>
@@ -398,55 +340,25 @@
     <div class="container">
         <div class="row justify-content-center pb-5 mb-3">
             <div class="col-md-7 heading-section text-center ftco-animate">
-                <h2>오늘의 입양 후기</h2>
+                <h2>최근 입양 후기</h2>
             </div>
         </div>
+
         <div class="row d-flex">
-            <div class="col-md-4 d-flex ftco-animate">
-                <div class="blog-entry align-self-stretch">
-                    <a href="blog-single.html" class="block-20 rounded"
-                       style="background-image: url('/resources/petsitting-master/images/image_1.jpg');">
-                    </a>
-                    <div class="text p-4">
-                        <div class="meta mb-2">
-                            <div><a href="#">April 07, 2020</a></div>
-                            <div><a href="#">Admin</a></div>
-                            <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
+            <c:forEach var="board" items="${detailForm}">
+                <div class="col-md-4">
+                    <div class="blog-entry align-self-stretch">
+                      <a href="/adopt_review/detail?kindOfBoard=${param.kindOfBoard}&bNumber=${board.getBNumber()}" class="block-20 rounded" style="background-image: url('/adopt_review/upload?filename=${board.imgPath}')"></a>
+                        <div class="text p-4">
+                            <div class="meta mb-2">
+                                <div><i class="far fa-eye"></i>date ${board.wrTime}</div><br/>
+                                <div><i class="far fa-eye"></i>by<a href="javascript:void(0)"> ${board.name}</a></div>
+                            </div>
+                                <a href="/adopt_review/detail?kindOfBoard=${param.kindOfBoard}&bNumber=${board.getBNumber()}"><h3 class="heading">${board.title}</h6></a>
                         </div>
-                        <h3 class="heading"><a href="#">저희집 자랑이 된 몽실이를 소개합니다!</a></h3>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 d-flex ftco-animate">
-                <div class="blog-entry align-self-stretch">
-                    <a href="blog-single.html" class="block-20 rounded"
-                       style="background-image: url('/resources/petsitting-master/images/gallery-12.jpg');">
-                    </a>
-                    <div class="text p-4">
-                        <div class="meta mb-2">
-                            <div><a href="#">April 07, 2020</a></div>
-                            <div><a href="#">Admin</a></div>
-                            <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
-                        </div>
-                        <h3 class="heading"><a href="#">사랑둥이 치치에요 이 아이가 가져다준 행복이 너무 큽니다</a></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 d-flex ftco-animate">
-                <div class="blog-entry align-self-stretch">
-                    <a href="blog-single.html" class="block-20 rounded"
-                       style="background-image: url('/resources/petsitting-master/images/image_3.jpg');">
-                    </a>
-                    <div class="text p-4">
-                        <div class="meta mb-2">
-                            <div><a href="#">April 07, 2020</a></div>
-                            <div><a href="#">Admin</a></div>
-                            <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a></div>
-                        </div>
-                        <h3 class="heading"><a href="#">저희집 고양이가 세상에서 제일 귀여워요</a></h3>
-                    </div>
-                </div>
-            </div>
+            </c:forEach>
         </div>
     </div>
 </section>
