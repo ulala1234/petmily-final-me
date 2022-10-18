@@ -59,6 +59,12 @@ public class Member implements DomainObj {
         this.id = id;
     }
 
+    public Member(String id, String pw, String email) {
+        this.id = id;
+        this.pw = pw;
+        this.email = email;
+    }
+
     public boolean matchPw(String pwd) {
         return pw.equals(pwd);
     }

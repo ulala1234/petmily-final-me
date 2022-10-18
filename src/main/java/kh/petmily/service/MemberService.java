@@ -33,4 +33,9 @@ public interface MemberService {
 
     public void modify(MemberModifyForm memberModifyForm);
 
+    public int memberCheck(String email, String id);
+
+    public void sendEmail(String email, String id) throws Exception;
+
+    public Member pwChange(PwChangeRequest pwChangeRequest);
 }

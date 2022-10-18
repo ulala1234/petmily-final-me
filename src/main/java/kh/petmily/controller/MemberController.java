@@ -10,6 +10,7 @@ import kh.petmily.domain.mail.form.EmailRequest;
 import kh.petmily.domain.member.Member;
 import kh.petmily.domain.member.form.JoinRequest;
 import kh.petmily.domain.member.form.MemberChangeForm;
+import kh.petmily.domain.member.form.PwChangeRequest;
 import kh.petmily.domain.temp.form.TempApplyPageForm;
 import kh.petmily.service.*;
 import lombok.RequiredArgsConstructor;
@@ -104,6 +105,44 @@ public class MemberController {
         return "redirect:/";
     }
 
+    // 비밀번호 찾기
+    @GetMapping("/pwChange")
+    public String pwChangeForm() {
+        return "/login/pwChangeForm";
+    }
+
+    @PostMapping("/pwChange")
+    public String pwChange(@RequestParam("email") String email, @RequestParam("id") String id, Model model) throws Exception {
+        if (memberService.memberCheck(email, id) == 0) {
+            model.addAttribute("msg", "이메일과 아이디를 확인해주세요");
+
+            return "/login/pwChangeForm";
+        } else {
+            memberService.sendEmail(email, id);
+
+            return "/member/pwChangeAuth";
+        }
+    }
+
+    @GetMapping("/member/pwChange")
+    public String pwUpdateForm(PwChangeRequest pwChangeRequest, Model model) {
+        log.info("pwChangeRequest = {}", pwChangeRequest);
+
+        model.addAttribute("email", pwChangeRequest.getEmail());
+        model.addAttribute("id", pwChangeRequest.getId());
+
+        return "/member/pwUpdateForm";
+    }
+
+    @PostMapping("/member/pwChange")
+    public String pwUpdate(PwChangeRequest pwChangeRequest) {
+        log.info("pwChangeRequest = {}", pwChangeRequest);
+
+        memberService.pwChange(pwChangeRequest);
+
+        return "/member/pwUpdateSuccess";
+    }
+
     // 로그아웃
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request) {
@@ -155,6 +194,7 @@ public class MemberController {
     public String withdrawForm() {
         return "/member/withdrawForm";
     }
+
     @PostMapping("/member/auth/withdraw")
     public String withdraw(HttpServletRequest request, @RequestParam String pw, @RequestParam String confirmPw) {
 

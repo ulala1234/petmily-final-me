@@ -36,7 +36,15 @@ public class MemberDao implements BasicDao {
     public void delete(int pk) {
         mapper.delete(pk);
     }
+
     // =======BasicDao 메소드=======
+    public int memberCheck(String email, String id) {
+        return mapper.memberCheck(email, id);
+    }
+
+    public void pwChange(Member member) {
+        mapper.pwChange(member);
+    }
 
     public Member selectMemberById(String id) {
         return mapper.selectMemberById(id);
