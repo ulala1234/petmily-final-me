@@ -19,11 +19,21 @@ spring:
     view:
       prefix: /WEB-INF/view/
       suffix: .jsp
-
   mail:
     host: smtp.gmail.com
     port: 587
     username: petmilykh@gmail.com
     password: xpocotgyizmmkbtk
-    properties.mail.smtp.auth: true
-    properties.mail.smtp.starttls.enable: true
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+  thymeleaf:
+    cache: false
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+    view-names: thymeleaf/*
