@@ -1,3 +1,5 @@
+/*회원가입시 이메일 인증 서비스 구현 클래스입니다.*/
+
 package kh.petmily.service;
 
 import kh.petmily.dao.EmailDao;
@@ -23,19 +25,20 @@ public class EmailServiceImpl implements EmailService {
     private String randVerificationCode;
     private final EmailDao emailDao;
 
+    // 임시 인증 번호 생성
     public void createVerificationCode() {
         Random rand = new Random();
         StringBuffer key = new StringBuffer();
 
-        for(int i = 0 ; i < 8 ; i++) {
+        for (int i = 0; i < 8; i++) {
             int index = rand.nextInt(3);
 
-            switch(index) {
+            switch (index) {
                 case 0:
-                    key.append((char) ((int)rand.nextInt(26) + 97)); //a-z
+                    key.append((char) ((int) rand.nextInt(26) + 97)); //a-z
                     break;
                 case 1:
-                    key.append((char) ((int)rand.nextInt(26) + 65)); //A-Z
+                    key.append((char) ((int) rand.nextInt(26) + 65)); //A-Z
                     break;
                 case 2:
                     key.append(rand.nextInt(10)); //0-9
@@ -74,6 +77,7 @@ public class EmailServiceImpl implements EmailService {
     public String setContext(String code) {
         Context context = new Context();
         context.setVariable("code", code);
+
         return templateEngine.process("checkEmail", context);
     }
 
@@ -81,10 +85,10 @@ public class EmailServiceImpl implements EmailService {
     public void registEmailCheck(String address, String code) {
         int cnt = emailDao.getCount(address);
 
-        if(cnt == 0) {
+        // EMAILCHECK 테이블의 데이터 유무로 insert 또는 update
+        if (cnt == 0) {
             emailDao.insertMailAuth(address, code);
-        }
-        else{
+        } else {
             emailDao.updateEmailCheck(address, code);
         }
     }
@@ -93,7 +97,8 @@ public class EmailServiceImpl implements EmailService {
     public EmailCheck makeEmailCheck(EmailCodeRequest mailAuth) {
         String code = emailDao.getCodeByEmail(mailAuth.getAddress());
 
-        if(code.equals(mailAuth.getCode())) {
+        // 회원가입 시 이메일 인증이 완료되면 IS_AUTH 가 0에서 1로 바뀜
+        if (code.equals(mailAuth.getCode())) {
             emailDao.completeCheck(mailAuth.getAddress());
         }
 
