@@ -136,7 +136,7 @@
 
     <update id="backState">
         update LOOKANIMALBOARD
-        set ANIMALSTATE = '보호'
+        set ANIMALSTATE = '목격'
         where LANUMBER = #{laNumber}
     </update>
 
