@@ -58,7 +58,7 @@
                     <div class="col">
                         <select name="animalState" class="form-control">
                             <option value="allAnimalState" selected>모든 상태</option>
-                            <option value="보호">보호</option>
+                            <option value="목격">목격</option>
                             <option value="매칭됨">매칭</option>
                             <option value="완료">완료</option>
                         </select>
