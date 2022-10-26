@@ -4,7 +4,8 @@
 }
 
 .section {
-    height: 100vh;
+    /*by 은지, 221025, 화면에 내용이 잘리는 부분 수정*/
+    height: 1000px;
     display: flex;
     justify-content: center;
     align-items: center;

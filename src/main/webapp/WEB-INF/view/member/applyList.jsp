@@ -31,7 +31,7 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-end">
             <div class="col-md-9 ftco-animate pb-5">
-                <h1 class="mb-0 bread">입양 임보 신청 내역 확인</h1>
+                <h1 class="mb-0 bread">입양 / 임시보호 신청 내역</h1>
             </div>
         </div>
     </div>
