@@ -18,6 +18,7 @@ public class MemberDetailForm {
     private String phone;
     private String grade;
 
+    /*생성자*/
     public MemberDetailForm(int mNumber, String id, String pw, String name, Date birth, String gender, String email, String phone, String grade) {
         this.mNumber = mNumber;
         this.id = id;
@@ -28,5 +29,13 @@ public class MemberDetailForm {
         this.email = email;
         this.phone = phone;
         this.grade = grade;
+    }
+
+    // by 은지, 221027, 봉사 신청서에서 회원 정보 받는 생성자
+    public MemberDetailForm(String name, Date birth, String email, String phone) {
+        this.name = name;
+        this.birth = birth;
+        this.email = email;
+        this.phone = phone;
     }
 }

@@ -29,12 +29,6 @@ public interface MemberMapper {
 
     String selectName(int pk);
 
-    String selectBirth(int pk);
-
-    String selectPhone(int pk);
-
-    String selectEmail(int pk);
-
     int selectCount();
 
     List<Member> selectIndex(@Param("start") int start, @Param("end") int end);

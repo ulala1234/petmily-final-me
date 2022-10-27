@@ -78,6 +78,17 @@ public class MemberServiceImpl implements MemberService {
         return memberDao.selectAll();
     }
 
+    // by 은지, 221027, 봉사활동 신청서에서 회원 정보 받는 메소드
+    @Override
+    public MemberDetailForm getDetailForm(int mNumber) {
+        Member findMember = memberDao.findByPk(mNumber);
+        MemberDetailForm memberDetailForm = new MemberDetailForm(
+                findMember.getName(), findMember.getBirth(),
+                findMember.getEmail(), findMember.getPhone());
+
+        return memberDetailForm;
+    }
+
     // 관리자 페이지
     @Override
     public MemberPageForm getMemberPage(int pageNo) {

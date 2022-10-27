@@ -35,41 +35,6 @@ public class VolunteerServiceImpl implements VolunteerService {
         volunteerDao.insert(volunteerApply);
     }
 
-    @Override
-    public String findAnimalName(int pk) {
-        String animalName = abandonedAnimalDao.selectName(pk);
-
-        return animalName;
-    }
-
-    @Override
-    public String findMemberName(int pk) {
-        String memberName = memberDao.selectName(pk);
-
-        return memberName;
-    }
-
-    @Override
-    public String findMemberBirth(int pk) {
-        String memberBirth = memberDao.selectBirth(pk);
-
-        return memberBirth;
-    }
-
-    @Override
-    public String findMemberPhone(int pk) {
-        String memberPhone = memberDao.selectPhone(pk);
-
-        return memberPhone;
-    }
-
-    @Override
-    public String findMemberEmail(int pk) {
-        String memberEmail = memberDao.selectEmail(pk);
-
-        return memberEmail;
-    }
-
     private VolunteerApply toVolunteerApply(VolunteerApplySubmitForm volunteerApplySubmitForm) {
         VolunteerApply volunteerApply = new VolunteerApply(
                 volunteerApplySubmitForm.getMNumber(),

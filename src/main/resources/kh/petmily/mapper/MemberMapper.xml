@@ -58,24 +58,6 @@
         where MNUMBER = #{pk}
     </select>
 
-    <select id="selectBirth" resultType="java.lang.String">
-        select BIRTH
-        from MEMBER
-        where MNUMBER = #{pk}
-    </select>
-
-    <select id="selectPhone" resultType="java.lang.String">
-        select PHONE
-        from MEMBER
-        where MNUMBER = #{pk}
-    </select>
-
-    <select id="selectEmail" resultType="java.lang.String">
-        select EMAIL
-        from MEMBER
-        where MNUMBER = #{pk}
-    </select>
-
     <select id="selectAll" resultType="kh.petmily.domain.member.Member">
         select *
         from MEMBER

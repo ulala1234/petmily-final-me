@@ -1,5 +1,7 @@
+<!-- 신청서 폼 Bootstrap 참고 사이트, https://codepen.io/jeetgohil/pen/gdwVeV -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,7 +85,6 @@
             }
         }
     </style>
-
 </head>
 
 <%@ include file="/WEB-INF/view/include/header.jspf" %>
@@ -97,7 +98,8 @@
         <div class="row no-gutters slider-text align-items-end">
             <div class="col-md-9 ftco-animate pb-5">
                 <p class="breadcrumbs mb-2">
-                    <span class="mr-2"><span>Volunteer Abandoned Animal - Submit<i class="ion-ios-arrow-forward"></i></span></span>
+                    <span class="mr-2"><span>Volunteer Abandoned Animal - Submit<i
+                            class="ion-ios-arrow-forward"></i></span></span>
                 </p>
                 <h1 class="mb-0 bread">봉사하기</h1>
             </div>
@@ -105,7 +107,7 @@
     </div>
 </section>
 
-
+<!-- Apply form start -->
 <div class="container survey">
     <h1 id="title" class="text-center">봉사 신청서</h1>
     <p id="main-title" class="text-center">해당 유기동물 봉사 신청 폼입니다.</p>
@@ -116,106 +118,55 @@
 
         <div class="form-row">
             <div class="col">
-                <label id="name-label">유기동물 이름</label> <input readonly id="name"
-                                                              type="text" value=${animalName } class="form-control">
+                <label id="name-label">유기동물 이름</label>
+                <input readonly id="name"
+                       type="text" value=${animalName } class="form-control">
             </div>
         </div>
-        <%--주석없애면 삭제--%>
-        <!-- <div class="col">
-                <label for="formGroupExampleInput">보호소명</label> <input readonly
-                    id="last-name" type="text" class="form-control"
-                    placeholder="값 가져오기" required>
-            </div>
-
-
-        </div>
-        <br />
-        <div class="form-row">
-            <div class="col">
-                <label for="formGroupExampleInput">봉사지역</label> <input
-                    id="last-name" type="text" class="form-control"
-                    placeholder="서울특별시 중랑구" required>
-            </div>
-            <div class="col">
-                <label for="formGroupExampleInput">봉사장소</label> <input
-                    id="last-name" type="text" class="form-control"
-                    placeholder="서울 유기동물 입양센터" required>
-            </div>
-            <div class="col">
-                <label for="formGroupExampleInput">봉사대상</label> <input
-                    id="last-name" type="text" class="form-control"
-                    placeholder="성인[대학생]" required>
-            </div>
-            <div class="col">
-                <label for="formGroupExampleInput">필요인원</label> <input
-                    id="last-name" type="text" class="form-control" placeholder="3"
-                    required>
-            </div>
-
-        </div>
-
-        <br />-->
-
-
-        <!-- 	 <br />
-        <div class="radiobuttons">
-            <p>구분</p>
-            <ul style="list-style: none;">
-                <li class="radio"><input name="radio-buttons" value="3"
-                    type="radio" class="userRatings"><label>개인</label></li>
-                <li class="radio"><input name="radio-buttons" value="3"
-                    type="radio" class="userRatings"><label>기타</label></li>
-            </ul>
-        </div>
--->
         <br/>
         <div class="form-group">
-            <label id="member-name">이름</label> <input readonly id="name"
-                                                      type="text" value=${memberName } class="form-control"
-                                                      aria-describedby="emailHelp"> <small id="form-control"
-                                                                                           class="form-text text-muted">※
-            자원봉사희망자 정보는 신청자와 관리센터만 볼 수
-            있습니다.</small>
-        </div>
-
-
-        <div class="form-group">
-            <label id="member-age">생년월일</label> <input readonly id="birth"
-                                                       type="text" value=${memberBirth} min="15" max="125"
-                                                       class="form-control" id="text"><small
-                id="form-control" class="form-text text-muted">※ 자원봉사희망자
-            정보는 신청자와 관리센터만 볼 수 있습니다.</small>
+            <label id="member-name-label">이름</label>
+            <input readonly id="member-name"
+                   type="text" value=${memberInfo.name } class="form-control"
+                   aria-describedby="emailHelp">
+            <small name="form-control" class="form-text text-muted">
+                ※ 자원봉사희망자 정보는 신청자와 관리센터만 볼 수 있습니다.</small>
         </div>
 
         <div class="form-group">
-            <label id="member-phone">연락처</label> <input readonly id="phone"
-                                                        type="text" value=${memberPhone} class="form-control"
-                                                        aria-describedby="emailHelp"
-        > <small
-                id="form-control" class="form-text text-muted">※ 자원봉사희망자
-            정보는 신청자와 관리센터만 볼 수 있습니다.</small>
+            <label id="member-age">생년월일</label>
+            <input readonly id="birth" type="text" value=${memberInfo.birth} min="15" max="125"
+                   class="form-control" id="text">
+            <small name="form-control" class="form-text text-muted">
+                ※ 자원봉사희망자 정보는 신청자와 관리센터만 볼 수 있습니다.</small>
         </div>
 
         <div class="form-group">
-            <label id="member-email">이메일</label> <input readonly id="email"
-                                                        type="text" value=${memberEmail} class="form-control"
-                                                        aria-describedby="emailHelp"
-        > <small
-                id="emailHelp" class="form-text text-muted">※ 자원봉사희망자 정보는
-            신청자와 관리센터만 볼 수 있습니다.</small>
+            <label id="member-phone">연락처</label>
+            <input readonly id="phone" type="text" value=${memberInfo.phone} class="form-control"
+                   aria-describedby="emailHelp">
+            <small id="form-control" class="form-text text-muted">
+                ※ 자원봉사희망자 정보는 신청자와 관리센터만 볼 수 있습니다.</small>
         </div>
 
+        <div class="form-group">
+            <label id="member-email">이메일</label>
+            <input readonly id="email" type="text" value=${memberInfo.email} class="form-control"
+                   aria-describedby="emailHelp">
+            <small id="emailHelp" class="form-text text-muted">
+                ※ 자원봉사희망자 정보는 신청자와 관리센터만 볼 수 있습니다.</small>
+        </div>
 
         <div class="form-row">
             <div class="col">
-                <label for="formGroupExampleInput">봉사활동 기간</label> <input
-                    id="volunteerPeriod" type="number" class="form-control"
-                    name="volunteerPeriod" placeholder="희망하는 봉사 활동 일 수를 기입해 주세요." required>
+                <label for="formGroupExampleInput">봉사활동 기간</label>
+                <input id="volunteerPeriod" type="number" class="form-control"
+                       name="volunteerPeriod" placeholder="희망하는 봉사 활동 일 수를 기입해 주세요." required>
             </div>
             <div class="col">
-                <label for="formGroupExampleInput">봉사 시작날짜</label> <input
-                    id="volunteerStartDate" type="date" class="form-control"
-                    name="volunteerStartDay" placeholder="입력" required>
+                <label for="formGroupExampleInput">봉사 시작날짜</label>
+                <input id="volunteerStartDate" type="date" class="form-control"
+                       name="volunteerStartDay" placeholder="입력" required>
             </div>
         </div>
 
@@ -243,7 +194,6 @@
                 stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/>
     </svg>
 </div>
-
 
 <script src="/resources/petsitting-master/js/jquery.min.js"></script>
 <script src="/resources/petsitting-master/js/jquery-migrate-3.0.1.min.js"></script>

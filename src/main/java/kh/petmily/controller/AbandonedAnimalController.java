@@ -1,11 +1,12 @@
 /*유기동물 컨트롤러 클래스로
 내가 구현한 기능은
-입양, 임시보호 신청서가 있다.*/
+입양 / 임시보호 신청서, 봉사 신청서가 있다.*/
 
 package kh.petmily.controller;
 
 import kh.petmily.domain.abandoned_animal.form.*;
 import kh.petmily.domain.member.Member;
+import kh.petmily.domain.member.form.MemberDetailForm;
 import kh.petmily.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -157,36 +158,23 @@ public class AbandonedAnimalController {
         return "/abandoned_animal/submitSuccess";
     }
 
-    //=======봉사하기=======
+    // by 은지, ======= 봉사 신청서 =======
     @GetMapping("/auth/volunteer")
     public String volunteerForm(@RequestParam("abNumber") int abNumber, HttpServletRequest request, Model model) {
+        // 세션으로 로그인 한 정보를 가지고 회원 정보 가져오기
         Member member = getAuthMember(request);
         int mNumber = member.getMNumber();
 
-        String animalName = volunteerService.findAnimalName(abNumber);
-        String memberName = volunteerService.findMemberName(mNumber);
-        String memberBirth = volunteerService.findMemberBirth(mNumber);
-        String memberPhone = volunteerService.findMemberPhone(mNumber);
-        String memberEmail = volunteerService.findMemberEmail(mNumber);
+        // by 은지, 221027 수정, 유기동물과 회원 정보 받아오는 서비스를 Volunteer -> Abandoned, Member 로 변경
+        String animalName = abandonedAnimalService.findName(abNumber);
+        MemberDetailForm memberInfo = memberService.getDetailForm(mNumber);
 
         if (animalName != null) {
             model.addAttribute("animalName", animalName);
         }
 
-        if (memberName != null) {
-            model.addAttribute("memberName", memberName);
-        }
-
-        if (memberBirth != null) {
-            model.addAttribute("memberBirth", memberBirth);
-        }
-
-        if (memberPhone != null) {
-            model.addAttribute("memberPhone", memberPhone);
-        }
-
-        if (memberEmail != null) {
-            model.addAttribute("memberEmail", memberEmail);
+        if (memberInfo != null) {
+            model.addAttribute("memberInfo", memberInfo);
         }
 
         return "/abandoned_animal/volunteerAbandonedAnimal";
@@ -196,9 +184,11 @@ public class AbandonedAnimalController {
     public String volunteer(@RequestParam("abNumber") int abNumber, @ModelAttribute VolunteerApplySubmitForm volunteerApplySubmitForm, HttpServletRequest request) {
         log.info("volunteerApplySubmitForm = {}", volunteerApplySubmitForm);
 
+        // 세션으로 로그인 한 정보를 가지고 회원 정보 가져오기
         Member member = getAuthMember(request);
         int mNumber = member.getMNumber();
 
+        // 보호소 정보 가져오기
         int sNumber = volunteerService.findsNumber(abNumber);
 
         volunteerApplySubmitForm.setMNumber(mNumber);

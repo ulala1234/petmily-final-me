@@ -21,6 +21,8 @@ public interface MemberService {
 
     List<Member> selectAll();
 
+    public MemberDetailForm getDetailForm(int mNumber);
+
     public boolean isPwEqualToConfirm(String pw, String confirmPw);
 
     public MemberPageForm getMemberPage(int pageNo);
