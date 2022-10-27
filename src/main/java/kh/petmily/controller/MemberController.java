@@ -45,7 +45,7 @@ public class MemberController {
         return "/main/index";
     }
 
-    // 회원가입
+    // ======= 회원가입 =======
     @GetMapping("/join")
     public String joinForm() {
         return "/login/joinForm";
@@ -66,7 +66,7 @@ public class MemberController {
         return "/login/joinSuccess";
     }
 
-    // 회원가입 시 메일 인증
+    // ======= 회원가입 시 메일 인증 =======
     @ResponseBody
     @PostMapping("/join/mailCheck")
     public String mailCheck(@RequestBody EmailRequest emailRequest) throws MessagingException {
@@ -88,7 +88,7 @@ public class MemberController {
         return emailCheck.getIs_Auth();
     }
 
-    // by 은지, 비밀번호 찾기 시 메일 발송
+    // by 은지, ======= 비밀번호 찾기 시 메일 발송 =======
     @GetMapping("/pwChange")
     public String pwChangeForm() {
         return "/login/pwChangeForm";
@@ -108,7 +108,7 @@ public class MemberController {
         }
     }
 
-    // by 은지, 비밀번호 찾기 인증 메일이 왔다면 링크 클릭 시 비밀번호 변경 페이지로
+    // by 은지, ======= 비밀번호 찾기 인증 메일이 왔다면 링크 클릭 시 비밀번호 변경 페이지로 =======
     @GetMapping("/member/pwChange")
     public String pwUpdateForm(PwChangeRequest pwChangeRequest, Model model) {
         log.info("pwChangeRequest = {}", pwChangeRequest);
@@ -128,7 +128,7 @@ public class MemberController {
         return "/member/pwUpdateSuccess";
     }
 
-    // 로그인
+    // ======= 로그인 =======
     @GetMapping("/login")
     public String loginForm() {
         return "/login/loginForm";
@@ -162,7 +162,7 @@ public class MemberController {
         return "redirect:/";
     }
 
-    // 로그아웃
+    // ======= 로그아웃 =======
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request) {
         // 세션 무효화
@@ -171,7 +171,7 @@ public class MemberController {
         return "redirect:/";
     }
 
-    // 마이페이지
+    // ======= 마이페이지 =======
     @GetMapping("/member/auth/mypage")
     public String mypage(HttpServletRequest request, Model model) {
         Member member = getAuthMember(request);
@@ -181,7 +181,7 @@ public class MemberController {
         return "/member/mypage";
     }
 
-    // 마이페이지 - 회원정보 변경
+    // ======= 마이페이지 - 회원정보 변경 =======
     @GetMapping(value = "/member/auth/change_info")
     public String changeInfo(HttpServletRequest request, Model model) {
         Member member = getAuthMember(request);
@@ -203,7 +203,7 @@ public class MemberController {
         return "/member/mypage";
     }
 
-    // 마이페이지 - 회원탈퇴
+    // ======= 마이페이지 - 회원탈퇴 =======
     @GetMapping("/member/auth/withdraw")
     public String withdrawForm() {
         return "/member/withdrawForm";
@@ -240,7 +240,7 @@ public class MemberController {
         return "/member/withdrawSuccess";
     }
 
-    // 마이페이지 - 찾아요 매칭 결과
+    // ======= 마이페이지 - 찾아요 매칭 결과 =======
     // 반려동물 찾아요 게시판에서 자신이 쓴 글 중
     // 유기동물 봤어요 게시판에 종, 종류, 위치가 같은 글이 있다면 매칭된 동물 조회
     @GetMapping("/member/auth/checkMatching")
@@ -267,7 +267,7 @@ public class MemberController {
         return "/member/listFindBoard";
     }
 
-    // 마이페이지 - 찾아요 매칭 결과 - 세부 내용
+    // ======= 마이페이지 - 찾아요 매칭 결과 - 세부 내용 =======
     @GetMapping("/member/auth/checkMatching/lookList")
     public String checkMatchingDetail(@RequestParam("faNumber") int faNumber, HttpServletRequest request, Model model) {
         FindBoard findBoard = findBoardService.getFindBoard(faNumber);
@@ -288,7 +288,7 @@ public class MemberController {
         return "/member/listLookBoard";
     }
 
-    // 마이페이지 - 신청 내역 - 임양 / 임시보호 신청 내역
+    // ======= 마이페이지 - 신청 내역 - 임양 / 임시보호 신청 내역 =======
     @GetMapping("/member/auth/myApply/{type}")
     public String getMyApply(@PathVariable("type") String type, HttpServletRequest request, Model model) {
         String pageNoVal = request.getParameter("pageNo");
@@ -321,7 +321,7 @@ public class MemberController {
         return "/member/applyList";
     }
 
-    // 세션으로 로그인 정보 조회
+    // ======= 세션으로 로그인 정보 조회 =======
     private Member getAuthMember(HttpServletRequest request) {
         // 세션이 존재하면 세션 생성, 그 외 null 반환
         HttpSession session = request.getSession(false);

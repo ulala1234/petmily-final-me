@@ -25,7 +25,7 @@ public class EmailServiceImpl implements EmailService {
     private String randVerificationCode;
     private final EmailDao emailDao;
 
-    // 임시 인증 번호 생성
+    // ======= 임시 인증 번호 생성 =======
     public void createVerificationCode() {
         Random rand = new Random();
         StringBuffer key = new StringBuffer();
