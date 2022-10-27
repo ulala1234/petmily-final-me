@@ -1,10 +1,10 @@
+<!-- 신청서 폼 Bootstrap 참고 사이트, https://codepen.io/jeetgohil/pen/gdwVeV -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <title>Petmily-Don't buy, Do Adopt</title>
 
     <meta charset="utf-8">
@@ -83,7 +83,6 @@
 <%@ include file="/WEB-INF/view/include/header.jspf" %>
 
 <body>
-
 <section class="hero-wrap hero-wrap-2"
          style="background-image: url('/resources/petsitting-master/images/bg_2.jpg');"
          data-stellar-background-ratio="0.5">
@@ -100,7 +99,7 @@
     </div>
 </section>
 
-<!-- servey form -->
+<!-- servey form start -->
 <div class="container survey">
     <h1 id="title" class="text-center">입양 / 임시보호 신청서</h1>
 
@@ -113,15 +112,15 @@
           method="post">
 
         <div class="form-group">
-            <label id="name-label">* 가족이 될 동물</label> <input id="name"
-                                                             type="name" name="name" class="form-control"
-                                                             value=${animalName
-                                                                     } readonly>
+            <label id="abandoned-name-label">* 가족이 될 동물</label>
+            <input id="abandoned-name" type="name" name="name" class="form-control"
+                   value=${animalName } readonly>
         </div>
 
         <div class="form-group">
-            <label id="name-label">* 이름</label> <input id="name" type="name"
-                                                       name="name" class="form-control" value=${memberName } readonly>
+            <label id="member-name-label">* 이름</label>
+            <input id="member-name" type="name"
+                   name="name" class="form-control" value=${memberName } readonly>
         </div>
 
         <br/>
@@ -129,10 +128,16 @@
         <div class="radiobuttons">
             <p>1. 선택</p>
             <ul style="list-style: none;">
-                <li class="radio"><input name="adoptOrTemp" value="adopt"
-                                         type="radio" class="userRatings" required><label>입양</label></li>
-                <li class="radio"><input name="adoptOrTemp" value="temp"
-                                         type="radio" class="userRatings" required><label>임시보호</label></li>
+                <li class="radio">
+                    <input name="adoptOrTemp" value="adopt"
+                           type="radio" class="userRatings" required>
+                    <label>입양</label>
+                </li>
+                <li class="radio">
+                    <input name="adoptOrTemp" value="temp"
+                           type="radio" class="userRatings" required>
+                    <label>임시보호</label>
+                </li>
             </ul>
         </div>
 
@@ -162,128 +167,37 @@
         <div class="radiobuttons">
             <p>3. 결혼 여부</p>
             <ul style="list-style: none;">
-                <li class="radio"><input name="maritalStatus" value="married"
-                                         type="radio" class="userRatings" required><label>기혼</label></li>
-                <li class="radio"><input name="maritalStatus" value="single"
-                                         type="radio" class="userRatings" required><label>미혼</label></li>
+                <li class="radio">
+                    <input name="maritalStatus" value="married"
+                           type="radio" class="userRatings" required>
+                    <label>기혼</label>
+                </li>
+                <li class="radio">
+                    <input name="maritalStatus" value="single"
+                           type="radio" class="userRatings" required>
+                    <label>미혼</label>
+                </li>
             </ul>
         </div>
 
         <div class="form-group">
-            <label id="job-label">4. 직업</label> <input id="job" type="name"
-                                                       name="job" class="form-control" placeholder="직업을 입력해주세요."
-                                                       required>
+            <label id="job-label">4. 직업</label>
+            <input id="job" type="name"
+                   name="job" class="form-control" placeholder="직업을 입력해주세요."
+                   required>
         </div>
-
-        <!-- 후에 설문 구현 -->
-        <!-- <p id="description" class="text-center" style="color: red">* 이제부터
-            설문을 시작하겠습니다.</p>
-
-        <div class="radiobuttons">
-            <p>1. 예전에 반려동물을 키우신 적이 있으신가요?</p>
-            <ul style="list-style: none;">
-                <li class="radio"><input name="radio-buttons" value="3"
-                    type="radio" class="userRatings"><label>예</label></li>
-                <li class="radio"><input name="radio-buttons" value="3"
-                    type="radio" class="userRatings"><label>아니오</label></li>
-            </ul>
-        </div>
-        <div class="message">
-            <textarea name="comment" id="comments" cols="30" rows="5"
-                placeholder="(만일 있으시다면 어떤 종류의 동물인지, 얼마나 오래 키우셨는지, 지금은 어떻게 되었는지 적어주세요.)"
-                optional></textarea>
-        </div>-->
 
         <br/>
         <br/>
+
         <div class="arr">
             <button id="submit" type="submit" class="btn btn-secondary"
                     style="float: center">제출
             </button>
         </div>
+
         <br/>
         <br/>
-
-        <!-- 폼 참고 -->
-        <!-- <div class="col">
-            <label id="name-label">First Name</label> <input id="name"
-                type="name" class="form-control" placeholder="First name" required>
-        </div>
-
-        <div class="col">
-            <label for="formGroupExampleInput">Last Name</label> <input
-                id="last-name" type="name" class="form-control"
-                placeholder="Last name" required>
-        </div>
-        <br />
-
-        <div class="form-group">
-            <label id="email-label">Email address</label> <input id="email"
-                type="email" class="form-control" aria-describedby="emailHelp"
-                placeholder="Enter email" required> <small id="emailHelp"
-                class="form-text text-muted">We'll never share your email
-                with anyone else.</small>
-        </div>
-
-        <div class="form-group">
-            <label id="number-label">Your age</label> <input id="number"
-                type="number" min="15" max="125" class="form-control" id="number"
-                placeholder="Age" required>
-        </div>
-
-        <div class="form-group">
-            <label for="exampleFormControlSelect2">Qualification</label> <select
-                class="form-control" id="dropdown">
-                <option>Primary Education</option>
-                <option>Secondary Eduction</option>
-                <option>Bachelors Degree</option>
-                <option>Masters</option>
-                <option>PHd</option>
-            </select>
-        </div>
-
-        <div class="radiobuttons">
-            <p>Whats Better?</p>
-            <ul style="list-style: none;">
-                <li class="radio"><input name="radio-buttons" value="3"
-                    type="radio" class="userRatings"><label>Front-End</label></li>
-                <li class="radio"><input name="radio-buttons" value="3"
-                    type="radio" class="userRatings"><label>Back-End</label></li>
-            </ul>
-        </div>
-
-        <div>
-            <p>What would you like us to change?</p>
-            <ul class="checkboxlabel">
-                <li class="checkbox" style="list-style: none;"><label>
-                        <input name="prefer" value="1" type="checkbox"
-                        class="userRatings">Front-end Projects
-                </label></li>
-                <li class="checkbox" style="list-style: none;"><label>
-                        <input name="prefer" value="1" type="checkbox"
-                        class="userRatings">Back-end Projects
-                </label></li>
-                <li class="checkbox" style="list-style: none;"><label>
-                        <input name="prefer" value="1" type="checkbox"
-                        class="userRatings">Website Layout
-                </label></li>
-                <li class="checkbox" style="list-style: none;"><label>
-                        <input name="prefer" value="1" type="checkbox"
-                        class="userRatings">Easier challenges
-                </label></li>
-            </ul>
-        </div>
-
-        <div class="message">
-            <p>Message to us</p>
-            <textarea name="comment" id="comments" cols="30" rows="5"
-                placeholder="What would you like to tell us?" optional></textarea>
-        </div>
-        <br />
-        <div>
-            <button id="submit" type="submit" class="btn btn-secondary"
-                style="float: right">Submit</button>
-        </div> -->
     </form>
 </div>
 <!-- servey form end -->

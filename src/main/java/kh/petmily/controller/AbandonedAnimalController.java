@@ -1,3 +1,7 @@
+/*유기동물 컨트롤러 클래스로
+내가 구현한 기능은
+입양, 임시보호 신청서가 있다.*/
+
 package kh.petmily.controller;
 
 import kh.petmily.domain.abandoned_animal.form.*;
@@ -8,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -105,13 +108,14 @@ public class AbandonedAnimalController {
         return "/abandoned_animal/submitSuccess";
     }
 
-    //=======입양/임보하기=======
+    // by 은지, ======= 입양 / 임시보호 신청서 =======
     @GetMapping("/auth/adopt_temp")
     public String adoptTempForm(@RequestParam int abNumber, HttpServletRequest request) {
-
+        // 세션으로 로그인 한 정보를 가지고 회원 정보 가져오기
         Member member = getAuthMember(request);
         int mNumber = member.getMNumber();
 
+        // 화면에 유기동물 이름, 회원 이름 보이게 세팅
         String animalName = abandonedAnimalService.findName(abNumber);
         String memberName = memberService.findName(mNumber);
 
@@ -127,28 +131,29 @@ public class AbandonedAnimalController {
     }
 
     @PostMapping("/auth/adopt_temp")
-    public String adoptTemp(@ModelAttribute AdoptTempSubmitForm form,
+    public String adoptTemp(@ModelAttribute AdoptTempSubmitForm adoptTempSubmitForm,
                             @RequestParam String adoptOrTemp,
-                            HttpServletRequest request,
-                            RedirectAttributes redirectAttributes) {
+                            HttpServletRequest request) {
+        log.info("adoptTempSubmitForm = {}", adoptTempSubmitForm);
 
-        log.info("adoptTempSubmitForm = {}", form);
-
+        // 세션으로 로그인 한 정보를 가지고 회원 정보 가져오고
+        // 입양 / 임시보호 신청서에 회원 정보 세팅
         Member member = getAuthMember(request);
         int mNumber = member.getMNumber();
 
-        form.setMNumber(mNumber);
+        adoptTempSubmitForm.setMNumber(mNumber);
 
+        // view 와 연결되어
+        // name 이 adoptOrTemp 인 value 가 adopt 인지 temp 인지에 따라 서비스 메소드를 다르게 설정
         if (adoptOrTemp.equals("adopt")) {
-            adoptTempService.adopt(form);
+            adoptTempService.adopt(adoptTempSubmitForm);
         }
 
         if (adoptOrTemp.equals("temp")) {
-            adoptTempService.tempProtect(form);
+            adoptTempService.tempProtect(adoptTempSubmitForm);
         }
 
-        redirectAttributes.addAttribute("abNumber", form.getAbNumber());
-
+        // by 은지, 221027 삭제, 불필요한 RedirectAttributes 삭제
         return "/abandoned_animal/submitSuccess";
     }
 
@@ -204,9 +209,13 @@ public class AbandonedAnimalController {
         return "/abandoned_animal/submitSuccess";
     }
 
+    // ======= 세션으로 로그인 정보 조회 =======
     private Member getAuthMember(HttpServletRequest request) {
+        // 세션이 존재하면 세션 생성, 그 외 null 반환
         HttpSession session = request.getSession(false);
+        // 세션 값 조회
         Member member = (Member) session.getAttribute("authUser");
+
         return member;
     }
 
