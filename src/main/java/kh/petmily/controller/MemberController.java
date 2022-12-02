@@ -108,7 +108,7 @@ public class MemberController {
         }
     }
 
-    // by 은지, ======= 비밀번호 찾기 인증 메일이 왔다면 링크 클릭 시 비밀번호 변경 페이지로 =======
+    // by 은지, ======= 비밀번호 변경 페이지 - 비밀번호 찾기 인증 메일 내에 연결된 링크 =======
     @GetMapping("/member/pwChange")
     public String pwUpdateForm(PwChangeRequest pwChangeRequest, Model model) {
         log.info("pwChangeRequest = {}", pwChangeRequest);

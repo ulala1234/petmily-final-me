@@ -125,16 +125,18 @@ public class MemberServiceImpl implements MemberService {
         memberDao.update(member);
     }
 
+    // by 은지, email 과 id 가 DB에 있고 입력한 값과 일치하면 1, 그외는 0
     @Override
     public int memberCheck(String email, String id) {
         return memberDao.memberCheck(email, id);
     }
 
+    // by 은지, 비밀번호 찾기 인증 메일 전송 - 링크 방식
     @Override
     public void sendEmail(String email, String id) throws Exception {
         MailUtils sendMail = new MailUtils(mailSender);
 
-        sendMail.setSubject("[Petmily 비밀번호 찾기 인증 메일입니다.]"); //메일제목
+        sendMail.setSubject("[Petmily 비밀번호 찾기 인증 메일입니다.]");
         sendMail.setText(
                 "<h1>Petmily 메일인증</h1>" +
                         "<br/>" + id + "님 " +
@@ -143,11 +145,12 @@ public class MemberServiceImpl implements MemberService {
                         "<br/><a href='http://localhost:8080/member/pwChange?email=" + email +
                         "&id=" + id +
                         "' target='_blank'>이메일 인증 확인</a>");
-        sendMail.setFrom("eunji1570@gmail.com", "Petmily");
+        sendMail.setFrom("petmilykh@gmail.com", "Petmily");
         sendMail.setTo(email);
         sendMail.send();
     }
 
+    // by 은지, view 에서 비밀번호와 비밀번호 확인이 일치한다면 비밀번호 변경
     @Override
     public Member pwChange(PwChangeRequest pwChangeRequest) {
         Member member = toMember(pwChangeRequest);
