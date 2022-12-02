@@ -1,3 +1,7 @@
+/*입양 후기 게시판 컨트롤러 클래스로
+내가 구현한 기능은
+가 있다.*/
+
 package kh.petmily.controller;
 
 import kh.petmily.domain.adopt_review.form.AdoptReviewForm;
@@ -58,12 +62,15 @@ public class AdoptReviewController {
                        @RequestParam(required = false) String keyword,
                        HttpServletRequest request,
                        Model model) {
+        // by 은지, ======= 조건부 검색 기능 추가 =======
         HttpSession session = request.getSession();
 
-        //====== 검색 추가 ======
         if (pbNumber == null) {
             initCondition(kindOfBoard, searchType, keyword, session);
             pbNumber = 1;
+            log.info("kindOfBoard = {}", kindOfBoard);
+            log.info("searchType = {}", searchType);
+            log.info("keyword = {}", keyword);
         }
 
         saveCondition(kindOfBoard, searchType, keyword, session);
@@ -190,6 +197,7 @@ public class AdoptReviewController {
                 session.setAttribute("kindOfBoard", kindOfBoard);
             } else {
                 session.setAttribute("kindOfBoard", "유기동물");
+                // 이걸 그냥 "입양후기"로 하면 되지 않나 전에 코드 보기
             }
         }
 
@@ -206,11 +214,17 @@ public class AdoptReviewController {
         }
     }
 
+    // by 은지, ======= 검색 종류와 키워드 값이 없으면 세션 제거 =======
     private void initCondition(String kindOfBoard, String searchType, String keyword, HttpSession session) {
+        // 게시판 종류는 입양 후기이고 검색 종류
         if (kindOfBoard != null && searchType == null && keyword == null) {
             session.removeAttribute("kindOfBoard");
             session.removeAttribute("searchType");
             session.removeAttribute("keyword");
+            log.info("kindOfBoard = {}", kindOfBoard);
+            log.info("searchType = {}", searchType);
+            log.info("keyword = {}", keyword);
+            // kind어쩌구 지워보기?
         }
     }
 

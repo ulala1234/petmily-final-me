@@ -1,3 +1,7 @@
+/*관리자 컨트롤러 클래스로
+내가 구현한 기능은
+후원 관리가 있다.*/
+
 package kh.petmily.controller;
 
 import kh.petmily.domain.abandoned_animal.AbandonedAnimal;
