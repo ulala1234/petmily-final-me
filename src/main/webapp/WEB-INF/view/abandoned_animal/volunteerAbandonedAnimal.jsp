@@ -111,6 +111,8 @@ pageEncoding="UTF-8" %>
 <div class="container survey">
     <h1 id="title" class="text-center">봉사 신청서</h1>
     <p id="main-title" class="text-center">해당 유기동물 봉사 신청 폼입니다.</p>
+    <small name="form-control" class="form-text text-muted text-center" >
+                    ※ 자원봉사희망자 정보는 신청자와 관리센터만 볼 수 있습니다.</small>
 
     <form id="submit-form"
           action="/abandoned_animal/auth/volunteer?abNumber=${param.abNumber}"
@@ -129,32 +131,24 @@ pageEncoding="UTF-8" %>
             <input readonly id="member-name"
                    type="text" value=${memberInfo.name } class="form-control"
                    aria-describedby="emailHelp">
-            <small name="form-control" class="form-text text-muted">
-                ※ 자원봉사희망자 정보는 신청자와 관리센터만 볼 수 있습니다.</small>
         </div>
 
         <div class="form-group">
             <label id="member-age">생년월일</label>
             <input readonly id="birth" type="text" value=${memberInfo.birth} min="15" max="125"
                    class="form-control" id="text">
-            <small name="form-control" class="form-text text-muted">
-                ※ 자원봉사희망자 정보는 신청자와 관리센터만 볼 수 있습니다.</small>
         </div>
 
         <div class="form-group">
             <label id="member-phone">연락처</label>
             <input readonly id="phone" type="text" value=${memberInfo.phone} class="form-control"
                    aria-describedby="emailHelp">
-            <small id="form-control" class="form-text text-muted">
-                ※ 자원봉사희망자 정보는 신청자와 관리센터만 볼 수 있습니다.</small>
         </div>
 
         <div class="form-group">
             <label id="member-email">이메일</label>
             <input readonly id="email" type="text" value=${memberInfo.email} class="form-control"
                    aria-describedby="emailHelp">
-            <small id="emailHelp" class="form-text text-muted">
-                ※ 자원봉사희망자 정보는 신청자와 관리센터만 볼 수 있습니다.</small>
         </div>
 
         <div class="form-row">
