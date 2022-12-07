@@ -38,6 +38,7 @@ public class AdoptReviewServiceImpl implements AdoptReviewService {
 
     @Override
     public AdoptReviewForm getAdoptReview(int bNumber) {
+        // by 은지, 221004 수정, 조회수 바로 오르게 updateViewCount 메소드 컨트롤러 -> 서비스로 이동
         adoptReviewDao.updateViewCount(bNumber);
         AdoptReview arForm = adoptReviewDao.findByPk(bNumber);
 

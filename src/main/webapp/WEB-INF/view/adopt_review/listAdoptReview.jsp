@@ -51,24 +51,30 @@ pageEncoding="UTF-8" %>
 <section class="ftco-section bg-light">
     <div class="container">
 
-        <!-- 검색 바 -->
+        <!-- by 은지, 검색 바 -->
         <span class="modal-header">
         <form action="/adopt_review/list" method="get">
             <div class="form-group row">
 
                 <input type="hidden" name="kindOfBoard" value="입양후기">
 
+                <!-- by 은지, 221205 수정, 검색 유형 유지되게 c 태그 추가-->
                 <div class="col">
                     <select name="searchType" class="form-control">
-                        <option value="allSearch" selected>게시글</option>
-                        <option value="title">제목</option>
-                        <option value="content">내용</option>
-                        <option value="name">작성자</option>
+                        <option value="allSearch"
+                            <c:out value="${searchType == null?'selected':''}"/>>게시글</option>
+                        <option value="title"
+                            <c:out value="${searchType eq 'title'?'selected':''}"/>>제목</option>
+                        <option value="content"
+                            <c:out value="${searchType eq 'content'?'selected':''}"/>>내용</option>
+                        <option value="name"
+                            <c:out value="${searchType eq 'name'?'selected':''}"/>>작성자</option>
                     </select>
                 </div>
 
+                <!-- by 은지, 221205 수정, 검색어 유지되게 value 값 변경-->
                 <div class="col">
-                    <input type="text" name="keyword" class="form-control" placeholder="검색어">
+                    <input type="text" name="keyword" class="form-control" value=${keyword}>
                 </div>
 
                 <div class="col">

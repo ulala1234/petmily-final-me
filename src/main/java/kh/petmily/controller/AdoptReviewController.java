@@ -56,7 +56,7 @@ public class AdoptReviewController {
     }
 
     @GetMapping("/list")
-    public String list(@RequestParam(required = false) Integer pbNumber,
+    public String list(@RequestParam(defaultValue = "1") Integer pbNumber,
                        @RequestParam(required = false) String kindOfBoard,
                        @RequestParam(required = false) String searchType,
                        @RequestParam(required = false) String keyword,
@@ -65,23 +65,20 @@ public class AdoptReviewController {
         // by 은지, ======= 조건부 검색 기능 추가 =======
         HttpSession session = request.getSession();
 
-        if (pbNumber == null) {
-            initCondition(kindOfBoard, searchType, keyword, session);
-            pbNumber = 1;
-            log.info("kindOfBoard = {}", kindOfBoard);
-            log.info("searchType = {}", searchType);
-            log.info("keyword = {}", keyword);
-        }
+        // 검색 유형과 검색어 null 로 초기화
+        initCondition(kindOfBoard, searchType, keyword, session);
 
-        saveCondition(kindOfBoard, searchType, keyword, session);
+        // 검색 유형과 검색어가 있으면 세션 생성
+        saveCondition(searchType, keyword, session);
 
-        kindOfBoard = (String) session.getAttribute("kindOfBoard");
         searchType = (String) session.getAttribute("searchType");
         keyword = (String) session.getAttribute("keyword");
 
         BoardPage boardPage = adoptReviewService.getAdoptReviewPage(pbNumber, kindOfBoard, searchType, keyword);
         model.addAttribute("boardList", boardPage);
         model.addAttribute("kindOfBoard", kindOfBoard);
+        model.addAttribute("searchType", searchType);
+        model.addAttribute("keyword", keyword);
 
         log.info("kindOfBoard = {}", kindOfBoard);
         log.info("searchType = {}", searchType);
@@ -92,6 +89,7 @@ public class AdoptReviewController {
 
     @GetMapping("/detail")
     public String detail(@RequestParam("bNumber") int bNumber, Model model) {
+        // by 은지, 221004 수정, 조회수 바로 오르게 updateViewCount 메소드 컨트롤러 -> 서비스로 이동
         AdoptReviewForm detailForm = adoptReviewService.getAdoptReview(bNumber);
 
         model.addAttribute("detailForm", detailForm);
@@ -191,16 +189,9 @@ public class AdoptReviewController {
         return "/adopt_review/deleteSuccess";
     }
 
-    private void saveCondition(String kindOfBoard, String searchType, String keyword, HttpSession session) {
-        if (kindOfBoard != null) {
-            if (!kindOfBoard.equals("")) {
-                session.setAttribute("kindOfBoard", kindOfBoard);
-            } else {
-                session.setAttribute("kindOfBoard", "유기동물");
-                // 이걸 그냥 "입양후기"로 하면 되지 않나 전에 코드 보기
-            }
-        }
-
+    // by 은지, ======= 검색 세션 상태 유지할 메소드 =======
+    private void saveCondition(String searchType, String keyword, HttpSession session) {
+        // by 은지, 221206 삭제, kindOfBoard 는 메뉴 탭 선택할 때 지정되므로 세션으로 유지할 필요 없어서 코드 삭제
         if (searchType != null) {
             session.setAttribute("searchType", searchType);
         }
@@ -209,22 +200,20 @@ public class AdoptReviewController {
             if (!keyword.equals("")) {
                 session.setAttribute("keyword", keyword);
             } else {
-                session.setAttribute("keyword", "allKeyword");
+                // by 은지, 221205 수정, allKeyword 를 빈칸으로 두어도 전체 검색이 되는 동적 쿼리이고
+                // view 에도 allKeyword 가 value 값인 것보다 빈칸인 것이 나아서 수정
+                session.setAttribute("keyword", "");
             }
         }
     }
 
-    // by 은지, ======= 검색 종류와 키워드 값이 없으면 세션 제거 =======
+    // by 은지, ======= 입양후기 게시판에 들어올 때 검색 유형과 키워드 값이 없으면 세션 제거하는 메소드 =======
+    // 세션 제거를 안하면 입양후기 게시판을 나갔다가 다시 들어와도 세션엔 전에 저장된 값이 남아있게 됨
     private void initCondition(String kindOfBoard, String searchType, String keyword, HttpSession session) {
-        // 게시판 종류는 입양 후기이고 검색 종류
         if (kindOfBoard != null && searchType == null && keyword == null) {
-            session.removeAttribute("kindOfBoard");
+            // by 은지, 221206 삭제, kindOfBoard 는 세션이 필요 없으니 세션 삭제도 필요 없어서 지움
             session.removeAttribute("searchType");
             session.removeAttribute("keyword");
-            log.info("kindOfBoard = {}", kindOfBoard);
-            log.info("searchType = {}", searchType);
-            log.info("keyword = {}", keyword);
-            // kind어쩌구 지워보기?
         }
     }
 

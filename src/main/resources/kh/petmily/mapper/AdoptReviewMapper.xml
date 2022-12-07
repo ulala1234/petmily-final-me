@@ -31,25 +31,26 @@
     </delete>
     <!--=======BasicMapper 메소드=======-->
 
-    <!--====== 검색 추가 ======-->
+    <!-- by 은지, ======= 조건부 검색 기능 동적쿼리 count =======-->
+    <!-- by 은지, 221205 수정, allKeyword 를 빈칸으로 변경하여 view 검색어에 allKeyword 안나오게 함-->
     <select id="selectCountWithCondition" resultType="java.lang.Integer">
         select count(*)
         from BOARD B inner join MEMBER M
         on B.MNUMBER = M.MNUMBER
         <where>
-            <if test="keyword != null and keyword != 'allKeyword' and searchType != null and 'title'.equals( searchType )">
+            <if test="keyword != null and keyword != '' and searchType != null and 'title'.equals( searchType )">
                 and B.TITLE like '%' || #{keyword} || '%'
             </if>
 
-            <if test="keyword != null and keyword != 'allKeyword' and searchType != null and 'content'.equals( searchType )">
+            <if test="keyword != null and keyword != '' and searchType != null and 'content'.equals( searchType )">
                 and B.CONTENT like '%' || #{keyword} || '%'
             </if>
 
-            <if test="keyword != null and keyword != 'allKeyword' and searchType != null and 'name'.equals( searchType )">
+            <if test="keyword != null and keyword != '' and searchType != null and 'name'.equals( searchType )">
                 and M.NAME like '%' || #{keyword} || '%'
             </if>
 
-            <if test="keyword != null and keyword != 'allKeyword' and searchType != null and 'allSearch'.equals( searchType )">
+            <if test="keyword != null and keyword != '' and searchType != null and 'allSearch'.equals( searchType )">
                 and (B.TITLE like '%' || #{keyword} || '%'
                 or B.CONTENT like '%' || #{keyword} || '%')
             </if>
@@ -57,26 +58,27 @@
         </where>
     </select>
 
-    <!--====== 검색 추가 ======-->
+    <!-- by 은지, ======= 조건부 검색 기능 동적쿼리 index =======-->
+    <!-- by 은지, 221205 수정, allKeyword 를 빈칸으로 변경하여 view 검색어에 allKeyword 안나오게 함-->
     <select id="selectIndexWithCondition" resultType="kh.petmily.domain.adopt_review.AdoptReview">
         select *
         from (select ROWNUM as NUM, A.*
         from (select * from BOARD B inner join MEMBER M
         on B.MNUMBER = M.MNUMBER
         <where>
-            <if test="keyword != null and keyword != 'allKeyword' and searchType != null and 'title'.equals( searchType )">
+            <if test="keyword != null and keyword != '' and searchType != null and 'title'.equals( searchType )">
                 and B.TITLE like '%' || #{keyword} || '%'
             </if>
 
-            <if test="keyword != null and keyword != 'allKeyword' and searchType != null and 'content'.equals( searchType )">
+            <if test="keyword != null and keyword != '' and searchType != null and 'content'.equals( searchType )">
                 and B.CONTENT like '%' || #{keyword} || '%'
             </if>
 
-            <if test="keyword != null and keyword != 'allKeyword' and searchType != null and 'name'.equals( searchType )">
+            <if test="keyword != null and keyword != '' and searchType != null and 'name'.equals( searchType )">
                 and M.NAME like '%' || #{keyword} || '%'
             </if>
 
-            <if test="keyword != null and keyword != 'allKeyword' and searchType != null and 'allSearch'.equals( searchType )">
+            <if test="keyword != null and keyword != '' and searchType != null and 'allSearch'.equals( searchType )">
                 and (B.TITLE like '%' || #{keyword} || '%'
                 or B.CONTENT like '%' || #{keyword} || '%')
             </if>
