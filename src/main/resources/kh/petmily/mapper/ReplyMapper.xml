@@ -36,6 +36,7 @@
         order by brNumber desc
     </select>
 
+    <!-- by 은지, ======= 게시글의 댓글수 count =======-->
     <select id="selectCount" resultType="int">
         select count(BNUMBER)
         from BOARDREPLY

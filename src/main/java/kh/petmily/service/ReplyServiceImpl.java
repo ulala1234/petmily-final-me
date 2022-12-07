@@ -28,6 +28,7 @@ public class ReplyServiceImpl implements ReplyService {
         Reply reply = new Reply(replyWriteForm.getbNumber(), replyWriteForm.getmNumber(), replyWriteForm.getReply());
 
         replyDao.insert(reply);
+        // by 은지, 221004 추가, 댓글 추가 시 댓글수 1 증가
         boardDao.updateReplyCount(reply.getBNumber(), 1);
     }
 
@@ -43,6 +44,7 @@ public class ReplyServiceImpl implements ReplyService {
         int bNumber = replyDao.getBNumber(brNumber);
 
         replyDao.delete(brNumber);
+        // by 은지, 221004 추가, 댓글 삭제 시 댓글수 1 감소
         boardDao.updateReplyCount(bNumber, -1);
     }
 

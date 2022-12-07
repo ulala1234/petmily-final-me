@@ -24,10 +24,12 @@ public class ReplyController {
 
     private final ReplyService replyService;
 
+    // by 은지, 221004 수정, 댓글수 추가하기 위해 List -> Map 객체로 변경
     @GetMapping("/{bNumber}")
     public ResponseEntity<Map<String, Object>> list(@PathVariable("bNumber") int bNumber, HttpServletRequest request) {
         Map<String, Object> map = new HashMap<>();
 
+        // 세션이 존재하면 세션 생성, 그 외 null 반환하고 세션 값 조회
         Member authMember = (Member) request.getSession(false).getAttribute("authUser");
 
         List<ReadReplyForm> list = replyService.getList(bNumber);
@@ -40,6 +42,7 @@ public class ReplyController {
             }
         }
 
+        // 특정 게시글의 댓글수 count
         int replyCount = replyService.selectCount(bNumber);
 
         map.put("list", list);

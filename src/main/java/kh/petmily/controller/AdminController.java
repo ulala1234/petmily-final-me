@@ -529,6 +529,7 @@ public class AdminController {
         return "/admin/adoptTemp/refuseTempPetDetail";
     }
 
+    // by 은지, ======= 관리자 후원 관리 리스트 =======
     @GetMapping("/donation")
     public String donationPage(@RequestParam(defaultValue = "1") int pageNo, Model model) {
         DonationPageForm donationPageForm = donateService.getDonationPage(pageNo);
@@ -537,6 +538,7 @@ public class AdminController {
         return "/admin/donation/donationList";
     }
 
+    // by 은지, ======= 관리자 후원 관리 세부 정보 =======
     @GetMapping("/donation/detail")
     public String donationDetail(@RequestParam("dNumber") int dNumber,
                                  @RequestParam("abNumber") int abNumber,
@@ -561,11 +563,13 @@ public class AdminController {
         return "/admin/donation/donationDetail";
     }
 
+    // by 은지, ======= 관리자 후원 관리 등록 =======
     @GetMapping("donation/create")
     public String donationCreateForm(Model model) {
         List<AbandonedAnimal> abandonedAnimals = abandonedAnimalService.selectAll();
         List<Member> members = memberService.selectAll();
 
+        // 화면에 유기동물 번호와 이름, 회원 번호와 이름 보이게 모든 정보 view 에 넘겨줌
         model.addAttribute("abandonedAnimals", abandonedAnimals);
         model.addAttribute("members", members);
 
@@ -579,6 +583,7 @@ public class AdminController {
         return "/admin/donation/createDonationSuccess";
     }
 
+    // by 은지, ======= 관리자 후원 관리 수정 =======
     @GetMapping("donation/modify")
     public String donationModifyForm(@RequestParam("dNumber") int dNumber, Model model) {
         List<AbandonedAnimal> abandonedAnimals = abandonedAnimalService.selectAll();
@@ -615,6 +620,7 @@ public class AdminController {
         return "redirect:/admin/donation/detail?dNumber={dNumber}&abNumber={abNumber}&mNumber={mNumber}";
     }
 
+    // by 은지, ======= 관리자 후원 관리 삭제 =======
     @GetMapping("/donation/delete")
     public String delete(@RequestParam("dNumber") int dNumber) {
         donateService.delete(dNumber);

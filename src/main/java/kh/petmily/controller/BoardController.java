@@ -44,6 +44,7 @@ public class BoardController {
 
     @GetMapping("/detail")
     public String detail(@RequestParam("bNumber") int bNumber, Model model) {
+        // by 은지, 221004 수정, 조회수 바로 오르게 updateViewCount 메소드 컨트롤러 -> 서비스로 이동
         ReadBoardForm detailForm = boardService.getBoard(bNumber);
 
         model.addAttribute("detailForm", detailForm);

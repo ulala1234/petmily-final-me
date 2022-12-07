@@ -69,12 +69,14 @@
         where B.MNUMBER = M.MNUMBER and BNUMBER = #{bNumber}
     </select>
 
+    <!--by 은지, ======= 조회수 =======-->
     <update id="updateViewCount">
         update BOARD
         set VIEWCOUNT = VIEWCOUNT + 1
         where BNUMBER = #{pk}
     </update>
 
+    <!--by 은지, ======= 댓글수 =======-->
     <update id="updateReplyCount">
         update BOARD
         set REPLYCOUNT = REPLYCOUNT + #{amount}
